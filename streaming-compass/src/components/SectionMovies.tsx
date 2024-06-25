@@ -6,12 +6,13 @@ import WatchButton from "./UI/WatchButton"
 import InfoButton from "./UI/InfoButton"
 import ListButton from "./UI/ListButton"
 import FavoriteButton from "./UI/FavoriteButton"
+import FilterGenre from "./UI/FilterGenre"
 
 
-
-const SectionHome = () => {
+const SectionMovies = () => {
   return (
     <div className="flex flex-col justify-end font-sans h-982 w-screen bg-gradient-to-tr from-blue-gradient md:justify-center">
+      <FilterGenre />
       <div className="flex flex-col gap-2.5 mb-8 mx-4 md:mt-9 md:mx-20">
         <Title />
         <Info />
@@ -30,4 +31,4 @@ const SectionHome = () => {
   )
 }
 
-export default SectionHome
+export default SectionMovies
