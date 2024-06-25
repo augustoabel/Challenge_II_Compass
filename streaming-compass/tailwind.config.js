@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Work Sans', 'sans-serif'],
+        sans: ['Work Sans', 'sans-serif'],
+        lato: ['Lato'],
       },
       colors: {
         'custom-gray-900': 'rgba(14, 16, 18, 1)',

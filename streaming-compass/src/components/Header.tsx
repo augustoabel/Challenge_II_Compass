@@ -11,6 +11,7 @@ import IconElipse from '../images/icons/Ellipse 9.png';
 import IconRonald from '../images/icons/icon-Ronald.png';
 import IconCreateProfile from '../images/icons/IconCreatProfile.png';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -25,7 +26,7 @@ const Header = () => {
   return (
     <>
       <header
-        className="bg-gradient-to-b from-custom-gray-900 via-custom-gray-800 border border-red-900 py-6 to-transparent md:flex md:items-center "
+        className="bg-gradient-to-b from-custom-gray-900 via-custom-gray-800 py-6 to-transparent md:flex md:items-center "
         style={{ backgroundSize: '100% 400%' }}
       >
         <div className="flex flex-col md:flex-row justify-center items-center md:w-full gap-6 md:justify-start">
@@ -39,7 +40,7 @@ const Header = () => {
           </div>
 
           <div className="order-2 md:order-1">
-            <nav className="md:justify-center md:items-center">
+            <nav className="md:justify-center md:items-center font-sans font-semibold">
               <ul className="flex space-x-4 w-80 justify-between md:w-full text-white flex-wrap md:flex-nowrap gap-6">
                 <li className="flex items-center">
                   <img
@@ -47,7 +48,7 @@ const Header = () => {
                     className="mr-2 mb-1"
                     alt="Ícone Início"
                   />
-                  Início
+                  <Link to="/home"> Início</Link>
                 </li>
                 <li className="flex items-center">
                   <img
@@ -55,7 +56,7 @@ const Header = () => {
                     className="mr-2 mb-1"
                     alt="Ícone Séries"
                   />
-                  Séries
+                  <Link to="/series">Séries </Link>
                 </li>
                 <li className="flex items-center">
                   <img
@@ -63,7 +64,7 @@ const Header = () => {
                     className="mr-2 mb-1"
                     alt="Ícone Filmes"
                   />
-                  Filmes
+                  <Link to="/filmes">Filmes </Link>
                 </li>
                 <li className="flex md:flex-row items-center justify-center flex-1 mt-4 md:mt-0">
                   <img
@@ -71,13 +72,13 @@ const Header = () => {
                     className="mr-2 mb-1"
                     alt="Ícone Celebridades"
                   />
-                  Celebridades
+                  <Link to="/actors">Celebridades</Link>
                 </li>
               </ul>
             </nav>
           </div>
           <div className="md:ml-auto order-1 md:order-2 mr-2">
-            <nav className="items-center mx-auto w-80 md:w-full">
+            <nav className="items-center mx-auto w-80 md:w-full font-sans font-semibold ">
               <ul className="flex space-x-4 md:w-82 justify-between text-white">
                 {searchOpen ? (
                   <div className="flex items-center bg-custom-neutral rounded-md p-2 w-full  flex-col md:flex-row">
@@ -132,7 +133,7 @@ const Header = () => {
                 >
                   <img src={Avatar} alt="Avatar" />
                   {menuOpen && (
-                    <div className="absolute right-0 mt-6 w-52 bg-gray-800 text-white rounded-md shadow-lg z-10 top-full ">
+                    <div className="absolute right-0 mt-6 w-52 bg-custom-neutral text-white rounded-md shadow-lg z-10 top-full ">
                       <ul>
                         <li className="px-4 py-2 flex items-center">
                           <img
@@ -157,7 +158,7 @@ const Header = () => {
                             className=" w-8 h-8 rounded-full mr-2"
                             alt="Add Profile"
                           />
-                          Crear perfil
+                          Criar perfil
                         </li>
                         <li className="px-4 py-2  border">Editar perfis</li>
                         <li className="px-4 py-2">Preferências</li>
