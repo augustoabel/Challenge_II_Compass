@@ -11,6 +11,7 @@ import IconElipse from '../images/icons/Ellipse 9.png';
 import IconRonald from '../images/icons/icon-Ronald.png';
 import IconCreateProfile from '../images/icons/IconCreatProfile.png';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -47,7 +48,7 @@ const Header = () => {
                     className="mr-2 mb-1"
                     alt="Ícone Início"
                   />
-                  Início
+                  <Link to="/home"> Início</Link>
                 </li>
                 <li className="flex items-center">
                   <img
@@ -55,7 +56,7 @@ const Header = () => {
                     className="mr-2 mb-1"
                     alt="Ícone Séries"
                   />
-                  Séries
+                  <Link to="/series">Séries </Link>
                 </li>
                 <li className="flex items-center">
                   <img
@@ -63,7 +64,7 @@ const Header = () => {
                     className="mr-2 mb-1"
                     alt="Ícone Filmes"
                   />
-                  Filmes
+                  <Link to="/filmes">Filmes </Link>
                 </li>
                 <li className="flex md:flex-row items-center justify-center flex-1 mt-4 md:mt-0">
                   <img
@@ -71,7 +72,7 @@ const Header = () => {
                     className="mr-2 mb-1"
                     alt="Ícone Celebridades"
                   />
-                  Celebridades
+                  <Link to="/actors">Celebridades</Link>
                 </li>
               </ul>
             </nav>
@@ -157,7 +158,7 @@ const Header = () => {
                             className=" w-8 h-8 rounded-full mr-2"
                             alt="Add Profile"
                           />
-                          Crear perfil
+                          Criar perfil
                         </li>
                         <li className="px-4 py-2  border">Editar perfis</li>
                         <li className="px-4 py-2">Preferências</li>
