@@ -1,5 +1,8 @@
+interface TitleSectionProps {
+  name: string;
+}
 
-const TitleSection = ({name}:any) => {
+const TitleSection: React.FC<TitleSectionProps> = ({ name }) => {
   return <h1 className="text-white text-4xl font-bold">{name}</h1>;
 };
 
