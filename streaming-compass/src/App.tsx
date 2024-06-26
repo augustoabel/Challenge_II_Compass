@@ -1,22 +1,18 @@
-import { useState } from 'react'
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Login from './components/Login';
+
 
 
 function App() {
 
   return (
     <> 
-      <Header />
         <BrowserRouter>
           <Routes>
-            <Route path="blogs" element={'#'} />
-            <Route path="*" element={'#'} />
+            <Route path="/" element={<Login />} />
           </Routes>
         </BrowserRouter>
-      <Footer />
     </>
   );
 }
