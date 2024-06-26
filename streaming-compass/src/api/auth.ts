@@ -30,7 +30,7 @@ export const login = async (token: string): Promise<void> => {
       }
     });
     console.log('Login bem-sucedido:', response);
-    window.location.href = `https://www.themoviedb.org/authenticate/${token}?redirect_to=https://www.google.com`
+    window.location.href = `https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:5173/home`
   } catch (error) {
     console.error('Erro ao fazer login:', error);
   }
