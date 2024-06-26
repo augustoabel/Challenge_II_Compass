@@ -11,7 +11,7 @@ import TitleSection from './UI/TitleSection';
 
 const SectionMovies = () => {
   return (
-    <div className="flex flex-col justify-end font-sans py-20 w-screen bg-gradient-to-tr from-blue-gradient md:justify-center  ">
+    <div className="flex flex-col justify-end font-sans py-40 w-screen bg-gradient-to-tr from-blue-gradient md:justify-center  ">
       <div className="flex flex-row gap-2.5 mb-8 mx-4 md:mt-9 md:mx-20  ">
         <TitleSection name="Filmes" />
         <FilterGenre />
