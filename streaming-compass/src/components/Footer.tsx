@@ -3,7 +3,7 @@ import CompassLogo from '../images/image-logo/compass.uol.png';
 const Footer = () => {
   return (
     <>
-      <div className="bg-custom-neutral p-6 flex  justify-center items-center gap-16 flex-col font-lato font-normal ">
+      <div className="bg-custom-neutral p-6 flex  justify-center items-center gap-16 flex-col font-lato font-normal  ">
         <img src={CompassLogo} alt="Compass Logo" className="md:w-52 md:h-16" />
 
         <div className="flex   w-96 md:w-screen ">
