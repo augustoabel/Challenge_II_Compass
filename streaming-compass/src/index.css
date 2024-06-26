@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.login-bg {
+    background-image: './images/icons/login.png' repeat;
+}
+
+
