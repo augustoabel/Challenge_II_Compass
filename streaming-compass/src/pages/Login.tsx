@@ -7,8 +7,7 @@ import Loading from '../components/UI/Loading.tsx'
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [token, setToken] = useState();
-
+  let token = ''
   const handleLogin = async () => {
     setIsLoading(true);
     try {
@@ -24,7 +23,7 @@ const Login = () => {
     {isLoading ? <Loading /> : 
         <div className="w-screen h-screen bg-cover bg-center relative" style={{ backgroundImage: `url(${LoginBg})` }}>
           <div className="relative z-10 flex flex-col items-center justify-center h-full ms-2 me-2">
-            <div className="p-5 rounded-2xl bg-opacity-50 bg-[#353843C9] sm:w-[400px] sm:h-[450px] lg:w-[750px] lg:h-[450px]">
+            <div className="p-5 blurLogin rounded-2xl bg-opacity-50 bg-[#353843C9] sm:w-[400px] sm:h-[450px] lg:w-[750px] lg:h-[450px]">
               <h1 className="font-bold mb-6 text-white text-center text-4xl mt-7">Compass Video</h1>
               <div className='w-[270px] m-auto'>
                 <h2 className="text-lg mb-[24px] font-light text-white text-center">Acesse sua conta para ver novos títulos</h2>

@@ -8,6 +8,7 @@ import IconRonald from '../images/icons/icon-Ronald.png';
 import IconCreateProfile from '../images/icons/IconCreatProfile.png';
 import { useState } from 'react';
 import { NavLink, useLocation, Link } from 'react-router-dom';
+import { deleteToken } from '../api/auth';
 
 const Header = () => {
   const location = useLocation();
@@ -241,7 +242,7 @@ const Header = () => {
                         <li className="px-4 py-2">Minha conta</li>
                         <li className="px-4 py-2">Ajuda</li>
                         <li className="px-4 py-2">
-                          <Link to="/">Sair</Link>
+                          <Link to="/" onClick={deleteToken}>Sair</Link>
                         </li>
                       </ul>
                     </div>

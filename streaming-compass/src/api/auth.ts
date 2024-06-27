@@ -15,6 +15,7 @@ export const getToken = async () => {
     const requestToken = response.data.request_token;
     console.log(requestToken);
     login(requestToken);
+    sessionStorage.setItem('token', JSON.stringify(requestToken));
   } catch (error) {
     console.error('Erro ao obter token:', error);
     return null;
@@ -45,7 +46,7 @@ export const loginGuest = async () => {
       Authorization: `Bearer ${AUTH_TOKEN}`
     }
   };
-  
+
   axios
     .request(options)
     .then(function (response) {
@@ -55,4 +56,29 @@ export const loginGuest = async () => {
     .catch(function (error) {
       console.error(error);
     });
+}
+
+export const deleteToken = async () => {
+  let token = sessionStorage.getItem('token');
+  token = JSON.parse(token)
+  console.log(token);
+  const options = { 
+    method: 'DELETE',
+    url: 'https://api.themoviedb.org/3/authentication/session',
+    headers: { 
+      accept: 'application/json', 
+      'content-type': 'application/json',
+      Authorization: `Bearer ${AUTH_TOKEN}`
+    },
+    data: { session_id: `${token}`}
+  };
+  console.log(options)
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    }); 
 }
