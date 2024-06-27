@@ -7,6 +7,7 @@ import Loading from '../components/UI/Loading.tsx'
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [token, setToken] = useState();
 
   const handleLogin = async () => {
     setIsLoading(true);

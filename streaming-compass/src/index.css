@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    width: 100vw;
+    overflow-x: hidden;
+}
 
 .login-bg {
     background-image: './images/icons/login.png' repeat;
