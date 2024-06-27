@@ -5,9 +5,9 @@ import SectionHome from '../components/SectionHome';
 const Home = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {/* Sections 1 */}
-      <SectionHome />
+        <SectionHome />
       {/* Sections 2 */}
 
       <Footer />

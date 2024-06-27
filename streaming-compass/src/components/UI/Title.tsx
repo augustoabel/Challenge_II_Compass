@@ -1,8 +1,13 @@
+import React from 'react';
 
-const Title = () => {
+interface TitleProps {
+  title: string;
+}
+
+const Title: React.FC<TitleProps>= ({ title }) => {
   return (
     <h1 className="text-white text-4xl font-bold">
-      Luca
+      {title}
     </h1>
   )
 }

@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <>
       <header
-        className="bg-gradient-to-b from-custom-gray-900 via-custom-gray-800 py-6 to-transparent md:flex md:items-center "
+        className="bg-transparent py-6 to-transparent md:flex md:items-center "
         style={{ backgroundSize: '100% 400%' }}
       >
         <div className="flex flex-col md:flex-row justify-center items-center md:w-full gap-6 md:justify-start">

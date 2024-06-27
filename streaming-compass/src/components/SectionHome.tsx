@@ -6,10 +6,12 @@ import WatchButton from './UI/WatchButton';
 import InfoButton from './UI/InfoButton';
 import ListButton from './UI/ListButton';
 import FavoriteButton from './UI/FavoriteButton';
+import Header from '../components/Header';
 
 const SectionHome = () => {
   return (
     <div className="flex flex-col justify-end font-sans py-52  bg-gradient-to-tr from-blue-gradient md:justify-center">
+      <Header />
       <div className="flex flex-col gap-2.5 mb-8 mx-4 md:mt-9 md:mx-20  ">
         <Title />
         <Info />
