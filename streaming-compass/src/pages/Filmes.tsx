@@ -7,7 +7,7 @@ const Filmes = () => {
     <>
       <Header />
       {/* Sections 1 */}
-      <SectionMovies />
+
       {/* Sections 2 */}
 
       <Footer />

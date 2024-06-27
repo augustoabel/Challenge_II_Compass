@@ -1,10 +1,9 @@
-
-const Info = () => {
-  return (
-    <div className="text-white font-normal text-base">
-      2021 - 1 h 41 min
-    </div>
-  )
+interface InfoProps {
+  info: string;
 }
 
-export default Info
+const Info: React.FC<InfoProps> = ({ info }) => {
+  return <div className="text-white font-normal text-base">{info}</div>;
+};
+
+export default Info;
