@@ -27,7 +27,6 @@ function App() {
           <Route path="/actors" element={<Actors />} />
         </Routes>
       </BrowserRouter>
-z
     </>
   );
 }

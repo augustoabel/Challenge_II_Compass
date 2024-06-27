@@ -35,3 +35,24 @@ export const login = async (token: string): Promise<void> => {
     console.error('Erro ao fazer login:', error);
   }
 };
+
+export const loginGuest = async () => {
+  const options = {
+    method: 'GET',
+    url: 'https://api.themoviedb.org/3/authentication/guest_session/new',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${AUTH_TOKEN}`
+    }
+  };
+  
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+      window.location.href = 'http://localhost:5173/home'
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+}
