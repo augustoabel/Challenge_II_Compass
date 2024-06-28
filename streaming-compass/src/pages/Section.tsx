@@ -13,7 +13,6 @@ import Header from '../components/Header';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import BGImage from '../images/cover.png';
 
 interface SectionProps {
   name: string;
@@ -189,7 +188,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
               <Description description={description} />
             </div>
 
-            <div className="flex flex-col gap-6 mx-4 mb-6 md:flex-row md:mx-20">
+            <div className="flex flex-col gap-6 mx-4 mb-6 md:flex-row md:mx-20 ">
               <WatchButton />
               <InfoButton />
               <div className="flex gap-6">
