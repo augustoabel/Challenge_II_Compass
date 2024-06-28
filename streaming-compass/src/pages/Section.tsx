@@ -13,7 +13,7 @@ import Header from '../components/Header';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import BGImage from '../images/cover.png';
+import SectionGrid from '../components/SectionGrid';
 
 interface SectionProps {
   name: string;
@@ -134,7 +134,6 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           setDescription(response.data.items[4].overview);
           setGlobalIdGenre(response.data.items[4].genre_ids);
           setBackImage(response.data.items[4].backdrop_path);
-          console.log(backImage);
         })
         .catch(function (error) {
           console.error(error);
@@ -148,7 +147,6 @@ const Section: React.FC<SectionProps> = ({ name }) => {
             'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
         },
       };
-
       axios
         .request(GenreHome)
         .then(function (response) {
@@ -158,24 +156,67 @@ const Section: React.FC<SectionProps> = ({ name }) => {
         .catch(function (error) {
           console.error(error);
         });
+    } else if (name === 'Actors') {
+      const Actors = {
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/person/popular?language=en-US&page=1',
+        headers: {
+          accept: 'application/json',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+        },
+      };
+
+      axios
+        .request(Actors)
+        .then(function (response) {
+          setTitle(response.data.results[0].known_for[0].title);
+          setReleaseDate(response.data.results[0].known_for[0].release_date);
+          setDescription(response.data.results[0].known_for[0].overview);
+          setBackImage(response.data.results[0].known_for[0].backdrop_path);
+          setGlobalIdGenre(response.data.results[0].known_for[0].genre_ids);
+          console.log(globalIdGenre);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+      const Genres = {
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/genre/tv/list?language=en',
+        headers: {
+          accept: 'application/json',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+        },
+      };
+
+      axios
+        .request(Genres)
+        .then(function (response) {
+          setGenre(response.data.genres);
+          setGenreGlobal(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     }
-  }, [location, name, backImage]);
+  }, [location]);
 
   return (
     <>
       <div
-        className="bg-no-repeat bg-cover"
+        className="bg-no-repeat bg-cover "
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original/${backImage})`,
-          backgroundPosition: 'center',
+          backgroundPosition: 'center ',
         }}
       >
         <div className="flex flex-col justify-start font-sans bg-gradient-to-tr from-blue-gradient md:justify-center ">
           <Header />
-          <div className="py-32">
+          <div className=" h-screen py-40">
             <div
               className={`flex flex-row gap-2.5 mb-8 mx-4 md:mt-9  md:mx-20 ${
-                name === 'Home' ? 'hidden' : ''
+                name === 'Home' || name === 'Actors' ? 'hidden' : ''
               }`}
             >
               <TitleSection name={name} />
@@ -189,7 +230,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
               <Description description={description} />
             </div>
 
-            <div className="flex flex-col gap-6 mx-4 mb-6 md:flex-row md:mx-20">
+            <div className="flex flex-col gap-6 mx-4 mb-6 md:flex-row md:mx-20 ">
               <WatchButton />
               <InfoButton />
               <div className="flex gap-6">
@@ -200,6 +241,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           </div>
         </div>
       </div>
+      <SectionGrid />
       <Footer />
     </>
   );
