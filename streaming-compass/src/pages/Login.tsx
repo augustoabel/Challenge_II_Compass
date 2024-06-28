@@ -7,7 +7,6 @@ import Loading from '../components/UI/Loading.tsx'
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
-  let token = ''
   const handleLogin = async () => {
     setIsLoading(true);
     try {
@@ -34,7 +33,7 @@ const Login = () => {
                 </button>
               </div>
               <div className='justify-center items-center text-center mt-6'>
-                <span className='text-[#FFFFFF99] text-sm font-light'>Não tem conta?</span>
+                <span className='text-[#FFFFFF99] text-sm font-light'>Não tem conta? </span>
                 <span className='text-white text-sm font-light'><button onClick={loginGuest}> Acesse como convidado</button></span>
 
               </div>
