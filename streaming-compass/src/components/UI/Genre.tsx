@@ -10,7 +10,6 @@ const Genre: React.FC<GenreProps> = ({ genreGlobal, globalIdGenre }) => {
     const genre = genreGlobal.genres.find((genre) => genre.id === id);
     return genre ? genre.name : '';
   };
-
   return (
     <div className="text-white font-normal text-xs">
       {globalIdGenre.map((id, index) => (
