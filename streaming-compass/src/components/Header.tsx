@@ -22,7 +22,7 @@ const Header = () => {
   };
   return (
     <>
-      <header className="bg-gradient-to-b from-custom-neutral to-transparent pr-6 py-6 md:flex md:items-center">
+      <header className="bg-gradient-to-b from-custom-neutral to-transparent pr-6  md:flex md:items-center py-6 md:py-2">
         <div className="flex flex-col md:flex-row justify-center items-center md:w-full gap-6 md:justify-start">
           <div className="ml-3">
             <img
