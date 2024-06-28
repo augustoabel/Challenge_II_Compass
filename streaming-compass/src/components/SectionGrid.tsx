@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import Slider from 'react-slick';
 import axios from 'axios';
 import 'slick-carousel/slick/slick.css';
@@ -96,7 +97,7 @@ const SectionGrid = () => {
   };
 
   return (
-    <div className="bg-custom-neutral p-20 text-white">
+    <div className="bg-gray-900 p-20 text-white">
       <p className="text-xl">Coleções de Halloween</p>
 
       <Slider {...settings} className="mt-10">
@@ -104,14 +105,13 @@ const SectionGrid = () => {
           halloweenCollections.map((item) => (
             <div
               key={item.id}
-              className="bg-blue-500 h-80 rounded-[30px] border-8 border-custom-neutral"
+              className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                 alt={item.title}
-                className="h-full w-full object-cover rounded-[15px]"
+                className="h-full w-full object-cover rounded-[8px]"
               />
-              <p className="text-center mt-2">{item.title}</p>
             </div>
           ))
         ) : (
@@ -127,14 +127,13 @@ const SectionGrid = () => {
             popularSeries.map((series) => (
               <div
                 key={series.id}
-                className="bg-blue-500 h-80 rounded-[30px] border-8 border-custom-neutral"
+                className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${series.poster_path}`}
                   alt={series.name}
-                  className="h-full w-full object-cover rounded-[15px]"
+                  className="h-full w-full object-cover rounded-[8px]"
                 />
-                <p className="text-center mt-2">{series.name}</p>
               </div>
             ))
           ) : (
@@ -151,14 +150,13 @@ const SectionGrid = () => {
             movies.map((movie) => (
               <div
                 key={movie.id}
-                className="bg-blue-500 h-80 rounded-[33px] border-8 border-custom-neutral"
+                className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[380px]"
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
-                  className="h-full w-full object-cover rounded-[30px]"
+                  className="h-full w-full object-cover rounded-[8px]"
                 />
-                <p className="text-center mt-2">{movie.title}</p>
               </div>
             ))
           ) : (
