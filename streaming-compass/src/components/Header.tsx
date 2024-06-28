@@ -22,10 +22,7 @@ const Header = () => {
   };
   return (
     <>
-      <header
-        className="bg-transparent py-6 to-transparent md:flex md:items-center "
-        style={{ backgroundSize: '100% 400%' }}
-      >
+      <header className="bg-gradient-to-b from-custom-neutral to-transparent pr-6 py-6 md:flex md:items-center">
         <div className="flex flex-col md:flex-row justify-center items-center md:w-full gap-6 md:justify-start">
           <div className="ml-3">
             <img
@@ -233,7 +230,7 @@ const Header = () => {
                           />
                           Criar perfil
                         </li>
-                        <li className="px-4 py-2  border">Editar perfis</li>
+                        <li className="px-4 py-2">Editar perfis</li>
                         <li className="px-4 py-2">Preferências</li>
                         <li className="px-4 py-2 text-blue-400">
                           Minha assinatura
