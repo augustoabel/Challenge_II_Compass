@@ -9,10 +9,11 @@ import FavoriteButton from '../components/UI/FavoriteButton';
 import FilterGenre from '../components/UI/FilterGenre';
 import TitleSection from '../components/UI/TitleSection';
 import Footer from '../components/Footer';
-
+import Header from '../components/Header';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import BGImage from '../images/cover.png';
 
 interface SectionProps {
   name: string;
@@ -26,6 +27,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
   const [description, setDescription] = useState('');
   const [genreGlobal, setGenreGlobal] = useState({ genres: [] });
   const [globalIdGenre, setGlobalIdGenre] = useState<number[]>([]);
+  const [backImage, setBackImage] = useState('');
 
   useEffect(() => {
     if (name === 'Filmes') {
@@ -65,6 +67,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           setReleaseDate(response.data.results[0].release_date);
           setDescription(response.data.results[0].overview);
           setGlobalIdGenre(response.data.results[0].genre_ids);
+          setBackImage(response.data.results[0].backdrop_path);
         })
         .catch(function (error) {
           console.error(error);
@@ -107,6 +110,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           setReleaseDate(response.data.results[0].first_air_date);
           setDescription(response.data.results[0].overview);
           setGlobalIdGenre(response.data.results[0].genre_ids);
+          setBackImage(response.data.results[0].backdrop_path);
         })
         .catch(function (error) {
           console.error(error);
@@ -129,6 +133,8 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           setReleaseDate(response.data.items[4].release_date);
           setDescription(response.data.items[4].overview);
           setGlobalIdGenre(response.data.items[4].genre_ids);
+          setBackImage(response.data.items[4].backdrop_path);
+          console.log(backImage);
         })
         .catch(function (error) {
           console.error(error);
@@ -153,33 +159,44 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           console.error(error);
         });
     }
-  }, [location, name]);
+  }, [location, name, backImage]);
 
   return (
     <>
-      <div className="flex flex-col justify-end font-sans py-40 w-screen bg-gradient-to-tr from-blue-gradient md:justify-center">
-        <div
-          className={`flex flex-row gap-2.5 mb-8 mx-4 md:mt-9 md:mx-20 ${
-            name === 'Home' ? 'hidden' : ''
-          }`}
-        >
-          <TitleSection name={name} />
-          <FilterGenre genre={genre} />
-        </div>
+      <div
+        className="bg-no-repeat bg-cover"
+        style={{
+          backgroundImage: `url(https://image.tmdb.org/t/p/original/${backImage})`,
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="flex flex-col justify-start font-sans bg-gradient-to-tr from-blue-gradient md:justify-center ">
+          <Header />
+          <div className="py-32">
+            <div
+              className={`flex flex-row gap-2.5 mb-8 mx-4 md:mt-9  md:mx-20 ${
+                name === 'Home' ? 'hidden' : ''
+              }`}
+            >
+              <TitleSection name={name} />
+              <FilterGenre genre={genre} />
+            </div>
 
-        <div className="flex flex-col gap-2.5 mb-8 mx-4 md:mt-9 md:mx-20">
-          <Title title={title} />
-          <Info info={releaseDate} />
-          <Genre genreGlobal={genreGlobal} globalIdGenre={globalIdGenre} />
-          <Description description={description} />
-        </div>
+            <div className="flex flex-col gap-2.5 mb-8 mx-4 md:mt-9 md:mx-20">
+              <Title title={title} />
+              <Info info={releaseDate} />
+              <Genre genreGlobal={genreGlobal} globalIdGenre={globalIdGenre} />
+              <Description description={description} />
+            </div>
 
-        <div className="flex flex-col gap-6 mx-4 mb-6 md:flex-row md:mx-20">
-          <WatchButton />
-          <InfoButton />
-          <div className="flex gap-6">
-            <ListButton />
-            <FavoriteButton />
+            <div className="flex flex-col gap-6 mx-4 mb-6 md:flex-row md:mx-20">
+              <WatchButton />
+              <InfoButton />
+              <div className="flex gap-6">
+                <ListButton />
+                <FavoriteButton />
+              </div>
+            </div>
           </div>
         </div>
       </div>
