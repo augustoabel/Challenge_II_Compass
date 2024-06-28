@@ -1,9 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import Section from './pages/Section';
-
 import Actors from './pages/Actors';
 import Login from './pages/Login';
+import Favorites from './pages/Favorites';
 
 function App() {
   return (
@@ -15,6 +14,7 @@ function App() {
           <Route path="/series" element={<Section name="Séries" />} />
           <Route path="/filmes" element={<Section name="Filmes" />} />
           <Route path="/actors" element={<Actors />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </BrowserRouter>
     </>

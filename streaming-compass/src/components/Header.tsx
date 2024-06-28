@@ -8,8 +8,16 @@ import IconRonald from '../images/icons/icon-Ronald.png';
 import IconCreateProfile from '../images/icons/IconCreatProfile.png';
 import { useState } from 'react';
 import { NavLink, useLocation, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const Header = () => {
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/favorites');
+  }
+
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -187,7 +195,10 @@ const Header = () => {
                       />
                       Buscar
                     </li>
-                    <li className="flex items-center  md:w-32  whitespace-nowrap">
+                    <li 
+                    className="flex items-center  md:w-32  whitespace-nowrap"
+                    onClick={handleClick}
+                    >
                       <img
                         src={IconAdd}
                         className="mr-2 mb-1 flex"
