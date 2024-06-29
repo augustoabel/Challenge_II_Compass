@@ -16,6 +16,8 @@ interface Item {
 interface ItemContextType {
   selectedItem: Item | null;
   setSelectedItem: (item: Item) => void;
+  idSeries: Item | null;
+  setIdSeries: (item: Item) => void;
 }
 
 interface ItemProviderProps {
@@ -25,9 +27,12 @@ const ItemContext = createContext<ItemContextType | undefined>(undefined);
 
 export const ItemProvider: React.FC<ItemProviderProps> = ({ children }) => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [idSeries, setIdSeries] = useState<Item | null>(null);
 
   return (
-    <ItemContext.Provider value={{ selectedItem, setSelectedItem }}>
+    <ItemContext.Provider
+      value={{ selectedItem, setSelectedItem, idSeries, setIdSeries }}
+    >
       {children}
     </ItemContext.Provider>
   );

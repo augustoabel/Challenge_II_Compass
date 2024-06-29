@@ -16,6 +16,9 @@ import axios from 'axios';
 import SectionGrid from '../components/SectionGrid';
 import { useItem } from '../context/getCards';
 import TrailerButton from '../components/UI/TrailerButton';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 interface SectionProps {
   name: string;
@@ -30,10 +33,33 @@ const Section: React.FC<SectionProps> = ({ name }) => {
   const [genreGlobal, setGenreGlobal] = useState({ genres: [] });
   const [globalIdGenre, setGlobalIdGenre] = useState<number[]>([]);
   const [backImage, setBackImage] = useState('');
+  //const [idSeries, setIdSeries] = useState<number>();
   const { selectedItem } = useItem();
+  const { idSeries } = useItem();
+  const [teste, setTeste] = useState([]);
 
   useEffect(() => {
-    if (name === 'Info') {
+    if (name === 'InfoSeries') {
+      const Seasons = {
+        method: 'GET',
+        url: `https://api.themoviedb.org/3/tv/${idSeries}?language=en-US`,
+        headers: {
+          accept: 'application/json',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+        },
+      };
+
+      axios
+        .request(Seasons)
+        .then(function (response) {
+          setTeste(response.data.seasons);
+          console.log(teste);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+
       if (selectedItem) {
         if (selectedItem.title) {
           setTitle(selectedItem.title);
@@ -46,7 +72,8 @@ const Section: React.FC<SectionProps> = ({ name }) => {
         } else {
           setReleaseDate(selectedItem.first_air_date);
         }
-
+        //setIdSeries(selectedItem.id);
+        console.log(idSeries);
         setDescription(selectedItem.overview);
         setBackImage(selectedItem.backdrop_path);
         setGlobalIdGenre(selectedItem.genre_ids);
@@ -223,7 +250,35 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           });
       }
     }
-  }, [location]);
+  }, [location, idSeries]);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -239,7 +294,10 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           <div className=" md:h-screen py-40">
             <div
               className={`flex flex-row gap-2.5 mb-8 mx-4 md:mt-9  md:mx-20 ${
-                name === 'Home' || name === 'Actors' || name === 'Info'
+                name === 'Home' ||
+                name === 'Actors' ||
+                name === 'infoMovies' ||
+                name === 'InfoSeries'
                   ? 'hidden'
                   : ''
               }`}
@@ -258,10 +316,10 @@ const Section: React.FC<SectionProps> = ({ name }) => {
 
             <div className="flex flex-col gap-6 mx-4 mb-6 md:flex-row md:mx-20 ">
               <WatchButton />
-              <div className={`${name === 'Info' ? '' : 'hidden'}`}>
+              <div className={`${name === 'InfoSeries' ? '' : 'hidden'}`}>
                 <TrailerButton />
               </div>
-              <div className={`${name === 'Info' ? 'hidden' : ''}`}>
+              <div className={`${name === 'InfoSeries' ? 'hidden' : ''}`}>
                 <InfoButton />
               </div>
 
@@ -271,9 +329,33 @@ const Section: React.FC<SectionProps> = ({ name }) => {
               </div>
             </div>
           </div>
+          <div className={`${name === 'InfoSeries' ? '' : 'hidden'} h-full `}>
+            <Slider {...settings} className="">
+              {teste.length > 0 ? (
+                teste.map((item) => (
+                  <div key={item.id} className=" rounded-[8px]  h-full ">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                      className="h-full w-full object-cover rounded-[8px]"
+                    />
+                  </div>
+                ))
+              ) : (
+                <p>Carregando...</p>
+              )}
+            </Slider>
+          </div>
         </div>
       </div>
-      <SectionGrid />
+
+      <div
+        className={`${
+          name === 'InfoSeries' || name === 'infoMovies' ? 'hidden' : ''
+        }`}
+      >
+        <SectionGrid />
+      </div>
+
       <Footer />
     </>
   );

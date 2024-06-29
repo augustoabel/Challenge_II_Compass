@@ -99,10 +99,18 @@ const SectionGrid: React.FC = () => {
 
   const navigate = useNavigate();
   const { setSelectedItem } = useItem();
+  const { setIdSeries } = useItem();
 
   const onClickCard = (item: Item) => {
     setSelectedItem(item);
-    navigate('/info');
+    setIdSeries(item.id);
+    navigate('/InfoSeries');
+    window.scrollTo(0, 0);
+  };
+  const onClickMovies = (item: Item) => {
+    setSelectedItem(item);
+    setIdSeries(item.id);
+    navigate('/infoMovies');
     window.scrollTo(0, 0);
   };
   return (
@@ -115,7 +123,7 @@ const SectionGrid: React.FC = () => {
             <div
               key={item.id}
               className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
-              onClick={() => onClickCard(item)}
+              onClick={() => onClickMovies(item)}
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
@@ -162,7 +170,7 @@ const SectionGrid: React.FC = () => {
               <div
                 key={movie.id}
                 className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[380px]"
-                onClick={() => onClickCard(movie)}
+                onClick={() => onClickMovies(movie)}
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
