@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import axios from 'axios';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useItem } from '../context/getCards';
 
-const SectionGrid = () => {
+const SectionGrid: React.FC = () => {
   const [movies, setMovies] = useState([]);
   const [halloweenCollections, setHalloweenCollections] = useState([]);
   const [popularSeries, setPopularSeries] = useState([]);
@@ -96,6 +97,22 @@ const SectionGrid = () => {
     ],
   };
 
+  const navigate = useNavigate();
+  const { setSelectedItem } = useItem();
+  const { setIdSeries } = useItem();
+
+  const onClickCard = (item: Item) => {
+    setSelectedItem(item);
+    setIdSeries(item.id);
+    navigate('/InfoSeries');
+    window.scrollTo(0, 0);
+  };
+  const onClickMovies = (item: Item) => {
+    setSelectedItem(item);
+    setIdSeries(item.id);
+    navigate('/infoMovies');
+    window.scrollTo(0, 0);
+  };
   return (
     <div className="bg-gray-900 p-20 text-white">
       <p className="text-xl">Coleções de Halloween</p>
@@ -106,6 +123,7 @@ const SectionGrid = () => {
             <div
               key={item.id}
               className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+              onClick={() => onClickMovies(item)}
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
@@ -128,6 +146,7 @@ const SectionGrid = () => {
               <div
                 key={series.id}
                 className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+                onClick={() => onClickCard(series)}
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${series.poster_path}`}
@@ -151,6 +170,7 @@ const SectionGrid = () => {
               <div
                 key={movie.id}
                 className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[380px]"
+                onClick={() => onClickMovies(movie)}
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
