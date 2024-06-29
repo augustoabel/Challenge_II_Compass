@@ -14,6 +14,8 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import SectionGrid from '../components/SectionGrid';
+import { useItem } from '../context/getCards';
+import TrailerButton from '../components/UI/TrailerButton';
 
 interface SectionProps {
   name: string;
@@ -28,177 +30,198 @@ const Section: React.FC<SectionProps> = ({ name }) => {
   const [genreGlobal, setGenreGlobal] = useState({ genres: [] });
   const [globalIdGenre, setGlobalIdGenre] = useState<number[]>([]);
   const [backImage, setBackImage] = useState('');
+  const { selectedItem } = useItem();
 
   useEffect(() => {
-    if (name === 'Filmes') {
-      const options = {
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/genre/movie/list?language=en',
-        headers: {
-          accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
-        },
-      };
+    if (name === 'Info') {
+      if (selectedItem) {
+        if (selectedItem.title) {
+          setTitle(selectedItem.title);
+        } else {
+          setTitle(selectedItem.name);
+        }
 
-      axios
-        .request(options)
-        .then(function (response) {
-          setGenre(response.data.genres);
-          setGenreGlobal(response.data);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+        if (selectedItem.release_date) {
+          setReleaseDate(selectedItem.release_date);
+        } else {
+          setReleaseDate(selectedItem.first_air_date);
+        }
 
-      const optionsTitle = {
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
-        headers: {
-          accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
-        },
-      };
-      axios
-        .request(optionsTitle)
-        .then(function (response) {
-          setTitle(response.data.results[0].title);
-          setReleaseDate(response.data.results[0].release_date);
-          setDescription(response.data.results[0].overview);
-          setGlobalIdGenre(response.data.results[0].genre_ids);
-          setBackImage(response.data.results[0].backdrop_path);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    } else if (name === 'Séries') {
-      const options = {
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/genre/tv/list?language=en',
-        headers: {
-          accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
-        },
-      };
+        setDescription(selectedItem.overview);
+        setBackImage(selectedItem.backdrop_path);
+        setGlobalIdGenre(selectedItem.genre_ids);
+      }
+    } else {
+      if (name === 'Filmes') {
+        const options = {
+          method: 'GET',
+          url: 'https://api.themoviedb.org/3/genre/movie/list?language=en',
+          headers: {
+            accept: 'application/json',
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+          },
+        };
 
-      axios
-        .request(options)
-        .then(function (response) {
-          setGenre(response.data.genres);
-          setGenreGlobal(response.data);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+        axios
+          .request(options)
+          .then(function (response) {
+            setGenre(response.data.genres);
+            setGenreGlobal(response.data);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
 
-      const optionsTitle = {
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/tv/popular',
-        headers: {
-          accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
-        },
-      };
+        const optionsTitle = {
+          method: 'GET',
+          url: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
+          headers: {
+            accept: 'application/json',
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+          },
+        };
+        axios
+          .request(optionsTitle)
+          .then(function (response) {
+            setTitle(response.data.results[0].title);
+            setReleaseDate(response.data.results[0].release_date);
+            setDescription(response.data.results[0].overview);
+            setGlobalIdGenre(response.data.results[0].genre_ids);
+            setBackImage(response.data.results[0].backdrop_path);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      } else if (name === 'Séries') {
+        const options = {
+          method: 'GET',
+          url: 'https://api.themoviedb.org/3/genre/tv/list?language=en',
+          headers: {
+            accept: 'application/json',
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+          },
+        };
 
-      axios
-        .request(optionsTitle)
-        .then(function (response) {
-          setTitle(response.data.results[0].name);
-          setReleaseDate(response.data.results[0].first_air_date);
-          setDescription(response.data.results[0].overview);
-          setGlobalIdGenre(response.data.results[0].genre_ids);
-          setBackImage(response.data.results[0].backdrop_path);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    } else if (name === 'Home') {
-      const HomePage = {
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/list/1',
-        headers: {
-          accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
-        },
-      };
+        axios
+          .request(options)
+          .then(function (response) {
+            setGenre(response.data.genres);
+            setGenreGlobal(response.data);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
 
-      axios
-        .request(HomePage)
-        .then(function (response) {
-          setTitle(response.data.items[4].title);
-          setReleaseDate(response.data.items[4].release_date);
-          setDescription(response.data.items[4].overview);
-          setGlobalIdGenre(response.data.items[4].genre_ids);
-          setBackImage(response.data.items[4].backdrop_path);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-      const GenreHome = {
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/genre/movie/list?language=en',
-        headers: {
-          accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
-        },
-      };
-      axios
-        .request(GenreHome)
-        .then(function (response) {
-          setGenre(response.data.genres);
-          setGenreGlobal(response.data);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    } else if (name === 'Actors') {
-      const Actors = {
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/person/popular?language=en-US&page=1',
-        headers: {
-          accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
-        },
-      };
+        const optionsTitle = {
+          method: 'GET',
+          url: 'https://api.themoviedb.org/3/tv/popular',
+          headers: {
+            accept: 'application/json',
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+          },
+        };
 
-      axios
-        .request(Actors)
-        .then(function (response) {
-          setTitle(response.data.results[0].known_for[0].title);
-          setReleaseDate(response.data.results[0].known_for[0].release_date);
-          setDescription(response.data.results[0].known_for[0].overview);
-          setBackImage(response.data.results[0].known_for[0].backdrop_path);
-          setGlobalIdGenre(response.data.results[0].known_for[0].genre_ids);
-          console.log(globalIdGenre);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-      const Genres = {
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/genre/tv/list?language=en',
-        headers: {
-          accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
-        },
-      };
+        axios
+          .request(optionsTitle)
+          .then(function (response) {
+            setTitle(response.data.results[0].name);
+            setReleaseDate(response.data.results[0].first_air_date);
+            setDescription(response.data.results[0].overview);
+            setGlobalIdGenre(response.data.results[0].genre_ids);
+            setBackImage(response.data.results[0].backdrop_path);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      } else if (name === 'Home') {
+        const HomePage = {
+          method: 'GET',
+          url: 'https://api.themoviedb.org/3/list/1',
+          headers: {
+            accept: 'application/json',
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+          },
+        };
 
-      axios
-        .request(Genres)
-        .then(function (response) {
-          setGenre(response.data.genres);
-          setGenreGlobal(response.data);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+        axios
+          .request(HomePage)
+          .then(function (response) {
+            setTitle(response.data.items[4].title);
+            setReleaseDate(response.data.items[4].release_date);
+            setDescription(response.data.items[4].overview);
+            setGlobalIdGenre(response.data.items[4].genre_ids);
+            setBackImage(response.data.items[4].backdrop_path);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+        const GenreHome = {
+          method: 'GET',
+          url: 'https://api.themoviedb.org/3/genre/movie/list?language=en',
+          headers: {
+            accept: 'application/json',
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+          },
+        };
+        axios
+          .request(GenreHome)
+          .then(function (response) {
+            setGenre(response.data.genres);
+            setGenreGlobal(response.data);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      } else if (name === 'Actors') {
+        const Actors = {
+          method: 'GET',
+          url: 'https://api.themoviedb.org/3/person/popular?language=en-US&page=1',
+          headers: {
+            accept: 'application/json',
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+          },
+        };
+
+        axios
+          .request(Actors)
+          .then(function (response) {
+            setTitle(response.data.results[0].known_for[0].title);
+            setReleaseDate(response.data.results[0].known_for[0].release_date);
+            setDescription(response.data.results[0].known_for[0].overview);
+            setBackImage(response.data.results[0].known_for[0].backdrop_path);
+            setGlobalIdGenre(response.data.results[0].known_for[0].genre_ids);
+            console.log(globalIdGenre);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+        const Genres = {
+          method: 'GET',
+          url: 'https://api.themoviedb.org/3/genre/tv/list?language=en',
+          headers: {
+            accept: 'application/json',
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTQxMDUzMC40NDI1NjksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S7TiUaD5YIp9NQDfqrQZulx2_BRpLuOft5XSu8sQ-ew',
+          },
+        };
+
+        axios
+          .request(Genres)
+          .then(function (response) {
+            setGenre(response.data.genres);
+            setGenreGlobal(response.data);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      }
     }
   }, [location]);
 
@@ -213,13 +236,16 @@ const Section: React.FC<SectionProps> = ({ name }) => {
       >
         <div className="flex flex-col justify-start font-sans bg-gradient-to-tr from-blue-gradient md:justify-center ">
           <Header />
-          <div className=" h-screen py-40">
+          <div className=" md:h-screen py-40">
             <div
               className={`flex flex-row gap-2.5 mb-8 mx-4 md:mt-9  md:mx-20 ${
-                name === 'Home' || name === 'Actors' ? 'hidden' : ''
+                name === 'Home' || name === 'Actors' || name === 'Info'
+                  ? 'hidden'
+                  : ''
               }`}
             >
               <TitleSection name={name} />
+
               <FilterGenre genre={genre} />
             </div>
 
@@ -232,7 +258,13 @@ const Section: React.FC<SectionProps> = ({ name }) => {
 
             <div className="flex flex-col gap-6 mx-4 mb-6 md:flex-row md:mx-20 ">
               <WatchButton />
-              <InfoButton />
+              <div className={`${name === 'Info' ? '' : 'hidden'}`}>
+                <TrailerButton />
+              </div>
+              <div className={`${name === 'Info' ? 'hidden' : ''}`}>
+                <InfoButton />
+              </div>
+
               <div className="flex gap-6">
                 <ListButton />
                 <FavoriteButton />
