@@ -333,7 +333,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
             <Slider {...settings} className="">
               {teste.length > 0 ? (
                 teste.map((item) => (
-                  <div key={item.id} className=" rounded-[8px]  h-full ">
+                  <div key={item.id} className=" rounded-[8px]  h-full  px-2">
                     <img
                       src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                       className="h-full w-full object-cover rounded-[8px]"
