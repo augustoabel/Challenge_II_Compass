@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import axios from 'axios';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useItem } from '../context/getCards';
 
-const SectionGrid = () => {
+const SectionGrid: React.FC = () => {
   const [movies, setMovies] = useState([]);
   const [halloweenCollections, setHalloweenCollections] = useState([]);
   const [popularSeries, setPopularSeries] = useState([]);
@@ -12,12 +14,15 @@ const SectionGrid = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
-          params: {
-            api_key: '276c8dd1a63ee21cfe68c83fd88f5107',
-            language: 'pt-BR',
-          },
-        });
+        const response = await axios.get(
+          'https://api.themoviedb.org/3/movie/popular',
+          {
+            params: {
+              api_key: '276c8dd1a63ee21cfe68c83fd88f5107',
+              language: 'pt-BR',
+            },
+          }
+        );
         setMovies(response.data.results);
       } catch (error) {
         console.error('Erro ao buscar os filmes:', error);
@@ -26,12 +31,15 @@ const SectionGrid = () => {
 
     const fetchHalloweenCollections = async () => {
       try {
-        const response = await axios.get('https://api.themoviedb.org/3/list/1', { // Ajuste o endpoint para as coleções de Halloween
-          params: {
-            api_key: '276c8dd1a63ee21cfe68c83fd88f5107',
-            language: 'pt-BR',
-          },
-        });
+        const response = await axios.get(
+          'https://api.themoviedb.org/3/list/1',
+          {
+            params: {
+              api_key: '276c8dd1a63ee21cfe68c83fd88f5107',
+              language: 'pt-BR',
+            },
+          }
+        );
         setHalloweenCollections(response.data.items);
       } catch (error) {
         console.error('Erro ao buscar as coleções de Halloween:', error);
@@ -40,12 +48,15 @@ const SectionGrid = () => {
 
     const fetchPopularSeries = async () => {
       try {
-        const response = await axios.get('https://api.themoviedb.org/3/tv/popular', {
-          params: {
-            api_key: '276c8dd1a63ee21cfe68c83fd88f5107',
-            language: 'pt-BR',
-          },
-        });
+        const response = await axios.get(
+          'https://api.themoviedb.org/3/tv/popular',
+          {
+            params: {
+              api_key: '276c8dd1a63ee21cfe68c83fd88f5107',
+              language: 'pt-BR',
+            },
+          }
+        );
         setPopularSeries(response.data.results);
       } catch (error) {
         console.error('Erro ao buscar as séries populares:', error);
@@ -86,16 +97,39 @@ const SectionGrid = () => {
     ],
   };
 
+  const navigate = useNavigate();
+  const { setSelectedItem } = useItem();
+  const { setIdSeries } = useItem();
+
+  const onClickCard = (item: Item) => {
+    setSelectedItem(item);
+    setIdSeries(item.id);
+    navigate('/InfoSeries');
+    window.scrollTo(0, 0);
+  };
+  const onClickMovies = (item: Item) => {
+    setSelectedItem(item);
+    setIdSeries(item.id);
+    navigate('/infoMovies');
+    window.scrollTo(0, 0);
+  };
   return (
-    <div className="bg-custom-neutral p-20 text-white">
+    <div className="bg-gray-900 p-20 text-white">
       <p className="text-xl">Coleções de Halloween</p>
 
       <Slider {...settings} className="mt-10">
         {halloweenCollections.length > 0 ? (
           halloweenCollections.map((item) => (
-            <div key={item.id} className="bg-blue-500 h-80 rounded-[30px] border-8 border-custom-neutral">
-              <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} className="h-full w-full object-cover rounded-[15px]" />
-              <p className="text-center mt-2">{item.title}</p>
+            <div
+              key={item.id}
+              className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+              onClick={() => onClickMovies(item)}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                alt={item.title}
+                className="h-full w-full object-cover rounded-[8px]"
+              />
             </div>
           ))
         ) : (
@@ -109,9 +143,16 @@ const SectionGrid = () => {
         <Slider {...settings} className="mt-1">
           {popularSeries.length > 0 ? (
             popularSeries.map((series) => (
-              <div key={series.id} className="bg-blue-500 h-80 rounded-[30px] border-8 border-custom-neutral">
-                <img src={`https://image.tmdb.org/t/p/w500${series.poster_path}`} alt={series.name} className="h-full w-full object-cover rounded-[15px]" />
-                <p className="text-center mt-2">{series.name}</p>
+              <div
+                key={series.id}
+                className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+                onClick={() => onClickCard(series)}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${series.poster_path}`}
+                  alt={series.name}
+                  className="h-full w-full object-cover rounded-[8px]"
+                />
               </div>
             ))
           ) : (
@@ -126,9 +167,16 @@ const SectionGrid = () => {
         <Slider {...settings} className="mt-2">
           {movies.length > 0 ? (
             movies.map((movie) => (
-              <div key={movie.id} className="bg-blue-500 h-80 rounded-[33px] border-8 border-custom-neutral">
-                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-full w-full object-cover rounded-[30px]" />
-                <p className="text-center mt-2">{movie.title}</p>
+              <div
+                key={movie.id}
+                className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[380px]"
+                onClick={() => onClickMovies(movie)}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  className="h-full w-full object-cover rounded-[8px]"
+                />
               </div>
             ))
           ) : (

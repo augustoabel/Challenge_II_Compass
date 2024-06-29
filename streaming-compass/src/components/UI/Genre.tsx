@@ -1,10 +1,27 @@
+import React from 'react';
 
-const Genre = () => {
-  return (
-    <div className="text-white font-normal text-xs">
-      Drama
-    </div>
-  )
+interface GenreProps {
+  genreGlobal: { genres: { id: number; name: string }[] };
+  globalIdGenre: number[];
 }
 
-export default Genre
+const Genre: React.FC<GenreProps> = ({ genreGlobal, globalIdGenre }) => {
+  const getGenreName = (id: number) => {
+    const genre = genreGlobal.genres.find((genre) => genre.id === id);
+    return genre ? genre.name : '';
+  };
+  return (
+    <div className="text-white font-normal text-xs">
+      {globalIdGenre.map((id, index) => (
+        <span
+          key={index}
+          className="inline-block  text-white  py-1 text-xs font-base mr-2 mb-2"
+        >
+          {getGenreName(id)}
+        </span>
+      ))}
+    </div>
+  );
+};
+
+export default Genre;
