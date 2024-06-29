@@ -7,8 +7,6 @@ import Loading from '../components/UI/Loading.tsx';
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [token, setToken] = useState();
-
   const handleLogin = async () => {
     setIsLoading(true);
     try {
@@ -29,14 +27,12 @@ const Login = () => {
           style={{ backgroundImage: `url(${LoginBg})` }}
         >
           <div className="relative z-10 flex flex-col items-center justify-center h-full ms-2 me-2">
-            <div className="p-5 rounded-2xl bg-opacity-50 bg-[#353843C9] sm:w-[400px] sm:h-[450px] lg:w-[750px] lg:h-[450px]">
-              <h1 className="font-bold mb-6 text-white text-center text-4xl mt-7">
-                Compass Video
-              </h1>
-              <div className="w-[270px] m-auto">
-                <h2 className="text-lg mb-[24px] font-light text-white text-center">
-                  Acesse sua conta para ver novos títulos
-                </h2>
+
+            <div className="p-5 blurLogin rounded-2xl bg-opacity-50 bg-[#353843C9] sm:w-[400px] sm:h-[450px] lg:w-[750px] lg:h-[450px]">
+              <h1 className="font-bold mb-6 text-white text-center text-4xl mt-7">Compass Video</h1>
+              <div className='w-[270px] m-auto'>
+                <h2 className="text-lg mb-[24px] font-light text-white text-center">Acesse sua conta para ver novos títulos</h2>
+
               </div>
               <div className="flex justify-center items-center">
                 <button
@@ -45,14 +41,11 @@ const Login = () => {
                 >
                   INICIAR SESSÃO COM TMDB
                 </button>
-              </div>
-              <div className="justify-center items-center text-center mt-6">
-                <span className="text-[#FFFFFF99] text-sm font-light">
-                  Não tem conta?
-                </span>
-                <span className="text-white text-sm font-light">
-                  <button onClick={loginGuest}> Acesse como convidado</button>
-                </span>
+
+              <div className='justify-center items-center text-center mt-6'>
+                <span className='text-[#FFFFFF99] text-sm font-light'>Não tem conta? </span>
+                <span className='text-white text-sm font-light'><button onClick={loginGuest}> Acesse como convidado</button></span>
+
               </div>
               <div className="flex justify-center items-center">
                 <img
