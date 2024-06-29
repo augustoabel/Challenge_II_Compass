@@ -30,8 +30,8 @@ const Header = () => {
   };
   return (
     <>
-      <header className="bg-gradient-to-b from-custom-neutral to-transparent pr-6  md:flex md:items-center py-6 md:py-2">
-        <div className="flex flex-col md:flex-row justify-center items-center md:w-full gap-6 md:justify-start">
+      <header className="bg-gradient-to-b from-custom-neutral to-transparent pr-6 lg:flex md:items-center py-6 lg:py-2">
+        <div className="flex flex-col lg:flex-row justify-center items-center lg:w-full gap-6 lg:justify-start">
           <div className="ml-3">
             <img
               src={CompassLogo}
@@ -41,9 +41,9 @@ const Header = () => {
             />
           </div>
 
-          <div className="order-2 md:order-1">
-            <nav className="md:justify-center md:items-center font-sans font-semibold ">
-              <ul className="flex space-x-4 w-80 justify-between md:w-full text-white flex-wrap md:flex-nowrap gap-6">
+          <div className="order-2 lg:order-1">
+            <nav className="lg:justify-center lg:items-center font-sans font-semibold ">
+              <ul className="flex space-x-4 w-80 justify-between lg:w-full text-white flex-wrap lg:flex-nowrap gap-6">
                 <li className="flex items-center ">
                   <NavLink
                     to="/home"
@@ -125,7 +125,7 @@ const Header = () => {
                     Filmes
                   </NavLink>
                 </li>
-                <li className="flex md:flex-row items-center justify-center flex-1 mt-4 md:mt-0">
+                <li className="flex lg:flex-row items-center justify-center flex-1 mt-4 lg:mt-0">
                   <NavLink
                     to="/actors"
                     className={` flex items-center  ${
@@ -155,18 +155,18 @@ const Header = () => {
               </ul>
             </nav>
           </div>
-          <div className="md:ml-auto order-1 md:order-2 mr-2">
-            <nav className="items-center mx-auto w-80 md:w-full font-sans font-semibold ">
-              <ul className="flex space-x-4 md:w-82 justify-between text-white">
+          <div className="lg:ml-auto order-1 lg:order-2 mr-2">
+            <nav className="items-center mx-auto w-80 lg:w-full font-sans font-semibold ">
+              <ul className="flex space-x-4 lg:w-82 justify-between text-white">
                 {searchOpen ? (
-                  <div className="flex items-center bg-custom-neutral rounded-md p-2 w-full  flex-col md:flex-row">
+                  <div className="flex items-center bg-custom-neutral rounded-md p-2 w-full flex-col lg:flex-row">
                     <input
                       type="text"
                       placeholder="Filme, série ou celebridade"
-                      className="w-full p-2 bg-custom-neutral text-white  md:w-64  "
+                      className="w-full p-2 bg-custom-neutral text-white lg:w-64  "
                     />
-                    <div className="md:flex md:items-center mr-12 md:mr-0">
-                      <select className="ml-2 bg-custom-neutral text-white  md:w-32 border  h-11  border-custom-border md:ml-6  ">
+                    <div className="lg:flex lg:items-center mr-12 lg:mr-0">
+                      <select className="ml-2 bg-custom-neutral text-white lg:w-32 border h-11  border-custom-border lg:ml-6  ">
                         <option value="filmes">Filmes</option>
                         <option value="series">Séries</option>
                         <option value="celebridades">Celebridades</option>
@@ -176,7 +176,7 @@ const Header = () => {
                       </button>
                       <button
                         onClick={toggleSearch}
-                        className="ml-4 md:h-6 md:w-4 "
+                        className="ml-4 lg:h-6 lg:w-4 "
                       >
                         <img src={IconCloseBusca} />
                       </button>
@@ -196,7 +196,7 @@ const Header = () => {
                       Buscar
                     </li>
                     <li 
-                    className="flex items-center  md:w-32  whitespace-nowrap"
+                    className="flex items-center lg:w-32 whitespace-nowrap cursor-pointer"
                     onClick={handleClick}
                     >
                       <img
