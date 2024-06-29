@@ -42,17 +42,18 @@ const Login = () => {
                   INICIAR SESSÃO COM TMDB
                 </button>
 
-              <div className='justify-center items-center text-center mt-6'>
-                <span className='text-[#FFFFFF99] text-sm font-light'>Não tem conta? </span>
-                <span className='text-white text-sm font-light'><button onClick={loginGuest}> Acesse como convidado</button></span>
+                <div className='justify-center items-center text-center mt-6'>
+                  <span className='text-[#FFFFFF99] text-sm font-light'>Não tem conta? </span>
+                  <span className='text-white text-sm font-light'><button onClick={loginGuest}> Acesse como convidado</button></span>
 
-              </div>
-              <div className="flex justify-center items-center">
-                <img
-                  src={CompassLogo}
-                  alt="Compass Logo"
-                  className="w-80"
-                ></img>
+                </div>
+                <div className="flex justify-center items-center">
+                  <img
+                    src={CompassLogo}
+                    alt="Compass Logo"
+                    className="w-80"
+                  ></img>
+                </div>
               </div>
             </div>
           </div>
@@ -60,6 +61,7 @@ const Login = () => {
       )}
     </>
   );
-};
+
+}
 
 export default Login;

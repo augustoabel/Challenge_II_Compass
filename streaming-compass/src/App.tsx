@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Section from './pages/Section';
 import Login from './pages/Login';
 
-import TitleSection from './components/UI/TitleSection';
 import VerifySession from "./pages/VerifySession";
 import Loading from "./components/UI/Loading";
 import Favorites from './pages/Favorites';
@@ -15,11 +14,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/verifySession" element={<Loading />} />
-          <Route 
+          <Route
             path="/home"
             element={
               <VerifySession
-                component={Home}
+                component={Section}
+                componentProps={{ name: "Home"  }}
               />
             }
           />
@@ -28,7 +28,7 @@ function App() {
             element={
               <VerifySession
                 component={Section}
-                componentProps={{ section: <Section name="Séries" /> }}
+                componentProps={{ name: "Séries"  }}
               />
             }
           />
@@ -37,23 +37,60 @@ function App() {
             element={
               <VerifySession
                 component={Section}
-                componentProps={{ section: <Section name="Filmes" /> }} />
+                componentProps={{ name: "Filmes"  }} />
             }
           />
           <Route
             path="/actors"
             element={
               <VerifySession
-                component={Actors} />
+                component={Section}
+                componentProps={{ name: "Actors" }}
+              />
             }
           />
-          <Route path="/home" element={<Section name="Home" />} />
-          <Route path="/series" element={<Section name="Séries" />} />
-          <Route path="/filmes" element={<Section name="Filmes" />} />
-          <Route path="/actors" element={<Section name="Actors" />} />
-          <Route path="/infoSeries" element={<Section name="InfoSeries" />} />
-          <Route path="/infoMovies" element={<Section name="infoMovies" />} />
-          <Route path="/favorites" element={<Favorites />} />
+
+          <Route
+            path="/series"
+            element={
+              <VerifySession
+                component={Section}
+                componentProps={{ name: "Séries" }}
+              />
+
+            } />
+          <Route
+            path="/filmes"
+            element={
+              <VerifySession
+                component={Section}
+                componentProps={{ name: "Filmes" }}
+              />
+            } />
+          <Route
+            path="/infoSeries"
+            element={
+              <VerifySession
+                component={Section}
+                componentProps={{ name: "InfoSeries" }}
+              />
+            } />
+          <Route
+            path="/infoMovies"
+            element={
+              <VerifySession
+                component={Section}
+                componentProps={{ name: "infoMovies" }}
+              />
+            } />
+          <Route
+            path="/favorites"
+            element={
+              <VerifySession
+                component={Section}
+                componentProps={{ section: <Favorites /> }}
+              />
+            } />
         </Routes>
       </BrowserRouter>
     </>

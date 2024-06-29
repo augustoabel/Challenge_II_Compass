@@ -4,7 +4,6 @@ import Load from '../../images/icons/load.png'
 import Style from '../../index.css'
 import { useLocation } from 'react-router-dom'
 import { createSession } from '../../api/auth'
-import Load from '../../images/icons/load.png';
 
 const Loading = () => {
   const location = useLocation()

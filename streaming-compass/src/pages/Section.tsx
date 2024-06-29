@@ -39,6 +39,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
   const [teste, setTeste] = useState([]);
 
   useEffect(() => {
+    console.log("NAME:", name)
     if (name === 'InfoSeries') {
       const Seasons = {
         method: 'GET',
