@@ -34,10 +34,10 @@ const Login = () => {
                 <h2 className="text-lg mb-[24px] font-light text-white text-center">Acesse sua conta para ver novos títulos</h2>
 
               </div>
-              <div className="flex justify-center items-center">
+              <div className="flex flex-col justify-center items-center">
                 <button
                   onClick={handleLogin}
-                  className="bg-[#037AEB] text-white w-[370px] py-3 rounded w-full font-medium tracking-widest"
+                  className="bg-[#037AEB] justify-center items-center text-white w-[370px] py-3 rounded font-medium tracking-widest"
                 >
                   INICIAR SESSÃO COM TMDB
                 </button>
@@ -59,9 +59,9 @@ const Login = () => {
           </div>
         </div>
       )}
-    </>
-  );
+        </>
+      );
 
 }
 
-export default Login;
+      export default Login;
