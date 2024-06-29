@@ -289,7 +289,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           backgroundPosition: 'center ',
         }}
       >
-        <div className="flex flex-col justify-start font-sans bg-gradient-to-tr from-blue-gradient md:justify-center ">
+        <div className="flex flex-col justify-start font-sans bg-gradient-to-tr from-gray-900 md:justify-center ">
           <Header />
           <div className=" md:h-screen py-40">
             <div
