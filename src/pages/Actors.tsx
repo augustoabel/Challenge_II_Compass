@@ -27,7 +27,7 @@ const SectionGrid = () => {
         const fetchedActors = response.data.results.slice(0, 3);
         setActors(fetchedActors);
 
-        // Fetch movies for each actor
+        
         if (fetchedActors.length > 0) {
           fetchMoviesForActor(fetchedActors[0].id, setActor1Movies);
           fetchMoviesForActor(fetchedActors[1].id, setActor2Movies);
