@@ -9,14 +9,12 @@ interface VerifySessionProps {
 }
 
 const VerifySession: React.FC<VerifySessionProps> = ({ component: Component, componentProps }) => {
-
+    console.log("VerifySession.tsx")
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
-
+    
     useEffect(() => {
       const verify = async () => {
-        let teste = await createSession();
-        console.log("teste", teste)
         const sessionId = sessionStorage.getItem('session_id');
         console.log('sessionId',sessionId);
         setIsAuthenticated(Boolean(sessionId));

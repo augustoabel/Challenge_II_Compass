@@ -9,6 +9,7 @@ import Actors from './pages/Actors';
 import Login from './pages/Login';
 import TitleSection from './components/UI/TitleSection';
 import VerifySession from "./pages/VerifySession";
+import Loading from "./components/UI/Loading";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/verifySession" element={<Loading />} />
           <Route 
             path="/home"
             element={
