@@ -252,6 +252,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
       }
     }
   }, [location, idSeries]);
+  
   const settings = {
     dots: true,
     infinite: true,
@@ -326,7 +327,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
 
               <div className="flex gap-6">
                 <ListButton />
-                <FavoriteButton />
+                <FavoriteButton selected={backImage} />
               </div>
             </div>
           </div>

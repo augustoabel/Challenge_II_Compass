@@ -1,24 +1,43 @@
 import { Tooltip } from "react-tooltip";
-import { useState } from 'react';
-import DoneIcon from '../../images/icons/done_black.png'
+import { useState, useEffect } from 'react';
+import { useItem } from "../../context/getCards";
+import DoneIcon from '../../images/icons/done_black.png';
 
-const FavoriteButton = () => {
+interface SelectedFavoriteProp {
+  selected: string;
+}
+
+const FavoriteButton: React.FC<SelectedFavoriteProp> = ({selected}) => {
   const [tooltipContent, setTooltipContent] = useState("Adicionar aos favoritos");
   const [checked, setChecked] = useState(false);
   const [add, setAdd] = useState("block");
   const [done, setDone] = useState("hidden");
 
-  const handleOnClickFavorite = () => {
-    if(!checked){
+  const { selectedFavorite, setSelectedFavorite } = useItem();
+
+  useEffect(() => {
+    if (selectedFavorite.includes(selected)) {
       setTooltipContent("aos favoritos");
-      setAdd("hidden")
-      setDone("block")
-      setChecked(true)
+      setAdd("hidden");
+      setDone("block");
+      setChecked(true);
     } else {
       setTooltipContent("Adicionar aos favoritos");
-      setAdd("block")
-      setDone("hidden")
-      setChecked(false)
+      setAdd("block");
+      setDone("hidden");
+      setChecked(false);
+    }
+  }, [selected, selectedFavorite]);
+
+  const handleOnClickFavorite = (url: string) => {
+    let newSelectedFavorites;
+    if(!checked){
+      newSelectedFavorites = [...selectedFavorite, url];
+      setSelectedFavorite(newSelectedFavorites);
+    } else {
+      newSelectedFavorites = selectedFavorite.filter(item => item !== url);
+      setTooltipContent("Adicionar aos favoritos");
+      setSelectedFavorite(newSelectedFavorites);
     }
   }
 
@@ -28,7 +47,7 @@ const FavoriteButton = () => {
         data-tooltip-id="favorite-button"
         data-tooltip-content={tooltipContent}
         data-tooltip-place="top"
-        onClick={handleOnClickFavorite}
+        onClick={() => handleOnClickFavorite(selected)}
         className="w-12 h-12 flex justify-center items-center text-white border-white/90 border border-solid rounded-full p-2 hover:text-black hover:bg-white"
       >
         <svg

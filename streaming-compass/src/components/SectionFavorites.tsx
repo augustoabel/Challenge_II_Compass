@@ -5,12 +5,14 @@ import Description from "./UI/Description";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useItem } from "../context/getCards";
 
 const SectionFavorites = () => {
-  const [favoritesMovies, setFavoritesMovies] = useState([]);
   const [favoritesSeries, setFavoritesSeries] = useState([]);
   const [laterMovies, setlaterMovies] = useState([]);
   const [laterSeries, setlaterSeries] = useState([]);
+  const { selectedFavorite } = useItem();
+
 
   const settings = {
     dots: true,
@@ -45,7 +47,7 @@ const SectionFavorites = () => {
   return (
     <div className="bg-gray-900 text-white h-screen">
       <Header />
-      <div className="px-16 pt-16">
+      <div className="px-16 pt-16" >
         <Title title="Minhas listas" />
         <Description description="Listas criadas por você de acordo com seus gostos" />
       </div>
@@ -53,16 +55,16 @@ const SectionFavorites = () => {
         <div className="mt-10 h-[400px]">
           <p className="text-xm pl-2">Filmes favoritos</p>
           <Slider {...settings} >
-          {favoritesMovies.length > 0 ? (
-          favoritesMovies.map((item) => (
+          {selectedFavorite.length > 0 ? (
+          selectedFavorite.map((item) => (
             <div
               key={item.id}
               className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]" 
               style={{width: 240}}
             >
               <img
-                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                alt={item.title}
+                src={`https://image.tmdb.org/t/p/original/${item}`}
+                alt=""
                 className="h-full w-full object-cover rounded-[8px]"
               />
             </div>
