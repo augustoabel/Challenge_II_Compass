@@ -45,7 +45,7 @@ The challenge was based accordingly to the design and user interface in 🔗[Fig
 <img src="./streaming-compass/src/images/desktopScreen.gif" alt="desktop screen">
 
 ### Mobile Screen
-<img width="290px" src="./src/images/mobileScreen.gif" alt="donation modal screen">
+<img width="290px" src="./streaming-compass/src/images/mobileScreen.gif" alt="donation modal screen">
 
 
 ## Considerations
