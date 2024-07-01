@@ -42,10 +42,10 @@ The challenge was based accordingly to the design and user interface in 🔗[Fig
 ## Screenshots
 
 ### Desktop Screen
-<img src="./src/assets/images/desktop-screen.gif" alt="desktop screen">
+<img src="./src/images/desktopScreen.gif" alt="desktop screen">
 
 ### Mobile Screen
-<img width="360px" src="./src/assets/images/donate-modal.gif" alt="donation modal screen">
+<img width="290px" src="./src/images/mobileScreen.gif" alt="donation modal screen">
 
 
 ## Considerations

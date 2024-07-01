@@ -129,8 +129,8 @@ const SectionGrid: React.FC = () => {
     window.scrollTo(0, 0);
   };
   return (
-    <div className="bg-gray-900 text-white">
-      <div className="mt-10 h-[400px]">
+    <div className="bg-gray-900 text-white p-20">
+      <div className="pt-10 h-[400px]">
         <p className="text-xm pl-2">Coleções de Halloween</p>
         <Slider {...settings} className="mt-1 cursor-pointer">
           {halloweenCollections.length > 0 ? (
@@ -153,7 +153,7 @@ const SectionGrid: React.FC = () => {
           )}
         </Slider>
       </div>
-      <div className="mt-10 h-[400px]">
+      <div className="pt-16 h-[400px]">
         <p className="text-xm pl-2">Séries em Alta</p>
         <Slider {...settings} className="mt-1 cursor-pointer">
           {popularSeries.length > 0 ? (
@@ -176,7 +176,7 @@ const SectionGrid: React.FC = () => {
           )}
         </Slider>
       </div>
-      <div className="mt-10 h-[400px]">
+      <div className="pt-16 h-[400px]">
         <p className="text-xm pl-2">Filmes em Alta</p>
         <Slider {...settings} className="mt-2 cursor-pointer">
           {movies.length > 0 ? (

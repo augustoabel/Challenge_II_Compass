@@ -423,7 +423,6 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           </div>
         </div>
       </div>
-
       <div
         className={`${
           name === 'InfoSeries' || name === 'infoMovies' || name === 'Actors' ? 'hidden' : ''
