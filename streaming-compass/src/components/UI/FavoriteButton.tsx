@@ -1,6 +1,6 @@
-import { Tooltip } from "react-tooltip";
+import { Tooltip } from 'react-tooltip';
 import { useState, useEffect } from 'react';
-import { useItem } from "../../context/getCards";
+import { useItem } from '../../context/exportContext';
 import DoneIcon from '../../images/icons/done_black.png';
 
 interface SelectedFavoriteProp {
@@ -8,25 +8,33 @@ interface SelectedFavoriteProp {
   selectedSerie: string;
 }
 
-const FavoriteButton: React.FC<SelectedFavoriteProp> = ({selectedMovie, selectedSerie}) => {
-  const [tooltipContent, setTooltipContent] = useState("Adicionar aos favoritos");
+const FavoriteButton: React.FC<SelectedFavoriteProp> = ({
+  selectedMovie,
+  selectedSerie,
+}) => {
+  const [tooltipContent, setTooltipContent] = useState(
+    'Adicionar aos favoritos'
+  );
   const [checked, setChecked] = useState(false);
-  const [add, setAdd] = useState("block");
-  const [done, setDone] = useState("hidden");
+  const [add, setAdd] = useState('block');
+  const [done, setDone] = useState('hidden');
 
   const { favoriteMovie, setFavoriteMovie } = useItem();
   const { favoriteSerie, setFavoriteSerie } = useItem();
 
   useEffect(() => {
-    if (favoriteMovie.includes(selectedMovie) || favoriteSerie.includes(selectedSerie)) {
-      setTooltipContent("aos favoritos");
-      setAdd("hidden");
-      setDone("block");
+    if (
+      favoriteMovie.includes(selectedMovie) ||
+      favoriteSerie.includes(selectedSerie)
+    ) {
+      setTooltipContent('aos favoritos');
+      setAdd('hidden');
+      setDone('block');
       setChecked(true);
     } else {
-      setTooltipContent("Adicionar aos favoritos");
-      setAdd("block");
-      setDone("hidden");
+      setTooltipContent('Adicionar aos favoritos');
+      setAdd('block');
+      setDone('hidden');
       setChecked(false);
     }
   }, [selectedMovie, favoriteMovie, selectedSerie, favoriteSerie]);
@@ -35,18 +43,18 @@ const FavoriteButton: React.FC<SelectedFavoriteProp> = ({selectedMovie, selected
     let newFavoriteMovie;
     let newFavoriteSerie;
 
-    if(!checked){
+    if (!checked) {
       newFavoriteMovie = [...favoriteMovie, movie];
       setFavoriteMovie(newFavoriteMovie);
       newFavoriteSerie = [...favoriteSerie, serie];
       setFavoriteSerie(newFavoriteSerie);
     } else {
-      newFavoriteMovie = favoriteMovie.filter(item => item !== movie);
+      newFavoriteMovie = favoriteMovie.filter((item) => item !== movie);
       setFavoriteMovie(newFavoriteMovie);
-      newFavoriteSerie = favoriteSerie.filter(item => item !== serie);
+      newFavoriteSerie = favoriteSerie.filter((item) => item !== serie);
       setFavoriteSerie(newFavoriteSerie);
     }
-  }
+  };
 
   return (
     <div>
@@ -72,7 +80,10 @@ const FavoriteButton: React.FC<SelectedFavoriteProp> = ({selectedMovie, selected
         </svg>
         <img src={DoneIcon} alt="Done Icon" className={done} />
       </button>
-      <Tooltip id="favorite-button" style={{ backgroundColor: "white", color: "black", fontWeight: "700"}}/>
+      <Tooltip
+        id="favorite-button"
+        style={{ backgroundColor: 'white', color: 'black', fontWeight: '700' }}
+      />
     </div>
   );
 };

@@ -29,7 +29,7 @@ const Header = () => {
 
   const watch: Watch[] = [
     { nome: 'Séries', rota: 'series' },
-    { nome: 'Filmes', rota: 'filmes' },
+    { nome: 'Filmes', rota: 'Movies' },
     { nome: 'Celebridades', rota: 'actors' },
   ];
 
