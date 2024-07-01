@@ -22,7 +22,6 @@ export const getToken = async () => {
 };
 
 export const login = async (token: string): Promise<void> => {
-  console.log("Está no login");
   try {
     const response = await axios.get(`${API_URL}${token}`, {
       headers: {
@@ -30,7 +29,6 @@ export const login = async (token: string): Promise<void> => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("Login bem-sucedido:", response);
     window.location.href = `https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:5173/verifySession`;
   } catch (error) {
     console.error("Erro ao fazer login:", error);
@@ -38,7 +36,6 @@ export const login = async (token: string): Promise<void> => {
 };
 
 export const createSession = async () => {
-  console.log("Creating session");
   let token = sessionStorage.getItem("token");
   const options = {
     method: "POST",
@@ -54,7 +51,6 @@ export const createSession = async () => {
   axios
     .request(options)
     .then((response) => {
-      console.log(response.data);
       sessionStorage.setItem("session_id", response.data.session_id);
       if(response.data.success == true) {
         window.location.href = `http://localhost:5173/home`;
@@ -78,7 +74,7 @@ export const loginGuest = async () => {
   axios
     .request(options)
     .then(function (response) {
-      console.log(response.data);
+      sessionStorage.setItem("guest_session_id", response.data.guest_session_id)
       window.location.href = "http://localhost:5173/home";
     })
     .catch(function (error) {
@@ -88,7 +84,6 @@ export const loginGuest = async () => {
 
 export const deleteToken = async () => {
   let session_id = sessionStorage.getItem("session_id");
-  console.log("session_id: ", session_id);
 
   const options = {
     method: "DELETE",
@@ -104,10 +99,10 @@ export const deleteToken = async () => {
   fetch("https://api.themoviedb.org/3/authentication/session", options)
     .then((response) => response.json())
     .then((response) => {
-      console.log(response);
       sessionStorage.setItem("location", "");
       sessionStorage.setItem("token", "");
       sessionStorage.setItem("session_id", "");
+      sessionStorage.setItem("guest_session_id", "");
     })
     .catch((err) => console.error(err));
 };

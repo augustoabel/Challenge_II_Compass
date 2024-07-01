@@ -9,10 +9,7 @@ const Loading = () => {
   const location = useLocation()
   const currentPath = location.pathname;
   sessionStorage.setItem('location', currentPath)
-  console.log(sessionStorage.getItem('location'))
-  console.log("rota: " + currentPath)
   if(currentPath == '/verifySession') {
-    console.log("Dentro do if")
     createSession()
   }
   return (

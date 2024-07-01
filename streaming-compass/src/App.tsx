@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Section from './pages/Section';
 import Login from './pages/Login';
+
 import VerifySession from './pages/VerifySession';
 import Loading from './components/UI/Loading';
 import Favorites from './pages/Favorites';
@@ -18,6 +19,15 @@ function App() {
               <VerifySession
                 component={Section}
                 componentProps={{ name: 'Home' }}
+              />
+            }
+          />
+          <Route
+            path="/series"
+            element={
+              <VerifySession
+                component={Section}
+                componentProps={{ name: 'Séries' }}
               />
             }
           />
@@ -71,7 +81,7 @@ function App() {
             path="/favorites"
             element={
               <VerifySession
-                component={Section}
+                component={Favorites}
                 componentProps={{ section: <Favorites /> }}
               />
             }

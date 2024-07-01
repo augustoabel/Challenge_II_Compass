@@ -9,15 +9,16 @@ interface VerifySessionProps {
 }
 
 const VerifySession: React.FC<VerifySessionProps> = ({ component: Component, componentProps }) => {
-    console.log("VerifySession.tsx")
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [isGuest, setGuest] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     
     useEffect(() => {
       const verify = async () => {
         const sessionId = sessionStorage.getItem('session_id');
-        console.log('sessionId',sessionId);
+        const guest_session_id = sessionStorage.getItem('guest_session_id');
         setIsAuthenticated(Boolean(sessionId));
+        setGuest(Boolean(guest_session_id));
         setLoading(false);
       };
   
@@ -27,8 +28,7 @@ const VerifySession: React.FC<VerifySessionProps> = ({ component: Component, com
     if (loading) {
       return <Loading />; 
     }
-    console.log("isAuthenticated", isAuthenticated);
-    return isAuthenticated ? <Component {...componentProps} /> : <Navigate to="/" />;
+    return isAuthenticated || isGuest ? <Component {...componentProps} /> : <Navigate to="/" />;
 
 }
 

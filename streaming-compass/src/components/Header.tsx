@@ -11,15 +11,36 @@ import { NavLink, useLocation, Link } from 'react-router-dom';
 import { deleteToken } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 
+interface Watch {
+  nome: string;
+  rota: string;
+}
+
 const Header = () => {
-  const navigate = useNavigate();
   const handleClick = () => {
     navigate('/favorites');
   };
 
+  const navigate = useNavigate();
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState<string>('');
+
+  const watch: Watch[] = [
+    { nome: 'Séries', rota: 'series' },
+    { nome: 'Filmes', rota: 'filmes' },
+    { nome: 'Celebridades', rota: 'actors' },
+  ];
+
+  const selectValueOptions = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedValue(event.target.value);
+  };
+
+  const submitValueOptions = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    ev.preventDefault();
+    navigate(`/${selectedValue}`);
+  };
 
   const toggleSearch = () => {
     setSearchOpen(!searchOpen);
@@ -165,14 +186,21 @@ const Header = () => {
                       className="w-full p-2 bg-custom-neutral text-white lg:w-64  "
                     />
                     <div className="lg:flex lg:items-center mr-12 lg:mr-0">
-                      <select className="ml-2 bg-custom-neutral text-white lg:w-32 border h-11  border-custom-border lg:ml-6  ">
-                        <option value="filmes">Filmes</option>
-                        <option value="series">Séries</option>
-                        <option value="celebridades">Celebridades</option>
-                      </select>
-                      <button className="ml-4  ">
-                        <img src={IconBusca} />
-                      </button>
+                      <form>
+                        <select
+                          className="ml-2 bg-custom-neutral text-white lg:w-32 border h-11  border-custom-border lg:ml-6"
+                          onChange={selectValueOptions}
+                        >
+                          {watch.map((i) => (
+                            <option value={i.rota}>{i.nome}</option>
+                          ))}
+                          {/* <option value="series">Séries</option>
+                          <option value="celebridades">Celebridades</option> */}
+                        </select>
+                        <button className="ml-4" onClick={submitValueOptions}>
+                          <img src={IconBusca} />
+                        </button>
+                      </form>
                       <button
                         onClick={toggleSearch}
                         className="ml-4 lg:h-6 lg:w-4 "
