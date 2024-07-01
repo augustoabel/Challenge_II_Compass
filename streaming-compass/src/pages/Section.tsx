@@ -11,7 +11,7 @@ import TitleSection from '../components/UI/TitleSection';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import SectionGrid from '../components/SectionGrid';
 import { useItem } from '../context/exportContext';
@@ -22,6 +22,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import SimilarMovies from '../components/SimilarMovies';
 import SimilarSeries from '../components/SimilarSeries';
 import Actors from './Actors';
+import InfoTemporada from '../components/UI/InfoTemporada';
 
 interface SectionProps {
   name: string;
@@ -39,6 +40,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
   const { selectedItem } = useItem();
   const { idSeries } = useItem();
   const [cardTemporadaItems, setCardTemporadasItem] = useState<Seasons[]>([]);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   interface Seasons {
     id: number;
@@ -313,14 +315,13 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           <Header />
           <div className=" md:h-screen py-40  ">
             <div
-              className={`flex flex-row gap-2.5 mb-8 mx-4 md:mt-9  md:mx-20 ${
-                name === 'Home' ||
+              className={`flex flex-row gap-2.5 mb-8 mx-4 md:mt-9  md:mx-20 ${name === 'Home' ||
                 name === 'Actors' ||
                 name === 'infoMovies' ||
                 name === 'InfoSeries'
-                  ? 'hidden'
-                  : ''
-              }`}
+                ? 'hidden'
+                : ''
+                }`}
             >
               <TitleSection name={name} />
 
@@ -367,9 +368,8 @@ const Section: React.FC<SectionProps> = ({ name }) => {
             </div>
           </div>
           <div
-            className={`${
-              name === 'InfoSeries' ? '' : 'hidden'
-            } h-full items-center ml-12`}
+            className={`${name === 'InfoSeries' ? '' : 'hidden'
+              } h-full items-center ml-12`}
           >
             <h4 className="font-sans font-bold  text-xl text-white ml-3 mb-4 mt-12 ">
               Temporadas
@@ -377,12 +377,17 @@ const Section: React.FC<SectionProps> = ({ name }) => {
             <Slider {...settings} className="cursor-pointer">
               {cardTemporadaItems.length > 0 ? (
                 cardTemporadaItems.map((item) => (
-                  <div key={item.id} className=" rounded-[8px]  h-full  px-2">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                      className="h-full w-full object-cover rounded-[8px]"
-                    />
-                  </div>
+                  <a href={`infoSeason/${idSeries}`}>
+                    <div
+                      key={item.id}
+                      className=" rounded-[8px]  h-full  px-2"
+                      onClick={() => setSelectedId(item.id)}>
+                      <img
+                        src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                        className="h-full w-full object-cover rounded-[8px]"
+                      />
+                    </div>
+                   </a>
                 ))
               ) : (
                 <p>Carregando...</p>
@@ -399,19 +404,18 @@ const Section: React.FC<SectionProps> = ({ name }) => {
             <h4 className="font-sans font-bold  text-xl text-white ml-3 mb-2 mt-12 ">
               Similares
             </h4>
-            <SimilarSeries />
+            <SimilarSeries  />
           </div>
         </div>
       </div>
 
       <div
-        className={`${
-          name === 'InfoSeries' || name === 'infoMovies' || name === 'Actors' ? 'hidden' : ''
-        }`}
+        className={`${name === 'InfoSeries' || name === 'infoMovies' || name === 'Actors' ? 'hidden' : ''
+          }`}
       >
         <SectionGrid />
       </div>
-      <div className={`${name === 'Actors' ? '': 'hidden'}`}>
+      <div className={`${name === 'Actors' ? '' : 'hidden'}`}>
         <Actors />
       </div>
       <Footer />

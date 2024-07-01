@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import VerifySession from './pages/VerifySession';
 import Loading from './components/UI/Loading';
 import Favorites from './pages/Favorites';
+import InfoTemporada from './components/UI/InfoTemporada';
 
 function App() {
   return (
@@ -83,6 +84,15 @@ function App() {
               <VerifySession
                 component={Favorites}
                 componentProps={{ section: <Favorites /> }}
+              />
+            }
+          />
+          <Route
+            path="/infoSeason/:id"
+            element={
+              <VerifySession
+                component={InfoTemporada}
+                componentProps={{ section: <InfoTemporada /> }}
               />
             }
           />
