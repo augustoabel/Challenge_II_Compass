@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Section from './pages/Section';
 import Login from './pages/Login';
-
 import VerifySession from './pages/VerifySession';
 import Loading from './components/UI/Loading';
 import Favorites from './pages/Favorites';

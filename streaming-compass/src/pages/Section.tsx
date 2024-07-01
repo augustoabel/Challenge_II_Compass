@@ -276,8 +276,9 @@ const Section: React.FC<SectionProps> = ({ name }) => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 1,
     slidesToScroll: 1,
+    variableWidth: true,
     swipeToSlide: true,
     arrows: true,
     responsive: [
@@ -345,7 +346,24 @@ const Section: React.FC<SectionProps> = ({ name }) => {
               </div>
 
               <div className="flex gap-6">
-                <ListButton />
+                <div className={`${name === 'Home' ? '' : 'hidden'}`}>
+                <ListButton selectedMovie={backImage} />
+                </div>
+                <div className={`${name === 'Séries' ? '' : 'hidden'}`}>
+                <ListButton selectedSerie={backImage} />
+                </div>
+                <div className={`${name === 'Filmes' ? '' : 'hidden'}`}>
+                <ListButton selectedMovie={backImage} />
+                </div>
+                <div className={`${name === 'Actors' ? '' : 'hidden'}`}>
+                <ListButton selectedMovie={backImage} />
+                </div>
+                <div className={`${name === 'InfoSeries' ? '' : 'hidden'}`}>
+                <ListButton selectedSerie={backImage} />
+                </div>
+                <div className={`${name === 'infoMovies' ? '' : 'hidden'}`}>
+                <ListButton selectedMovie={backImage} />
+                </div>
                 <div className={`${name === 'Home' ? '' : 'hidden'}`}>
                   <FavoriteButton selectedMovie={backImage} />
                 </div>
@@ -368,11 +386,9 @@ const Section: React.FC<SectionProps> = ({ name }) => {
             </div>
           </div>
           <div
-            className={`${
-              name === 'InfoSeries' ? '' : 'hidden'
-            } h-full items-center ml-12`}
+            className={`${name === 'InfoSeries' ? '' : 'hidden'} h-[400px] items-center m-10`}
           >
-            <h4 className="font-sans font-bold  text-xl text-white ml-3 mb-4 mt-12 ">
+            <h4 className="font-sans font-bold text-xm text-white ml-3 mb-4 mt-12 ">
               Temporadas
             </h4>
             <Slider {...settings} className="cursor-pointer">
@@ -397,21 +413,20 @@ const Section: React.FC<SectionProps> = ({ name }) => {
               )}
             </Slider>
           </div>
-          <div className={`${name === 'infoMovies' ? '' : 'hidden'} md:ml-12`}>
-            <h4 className="font-sans font-bold  text-xl text-white ml-3 mb-2 mt-12 ">
+          <div className={`${name === 'infoMovies' ? '' : 'hidden'} m-10 h-[400px]`}>
+            <h4 className="font-sans font-bold text-xm text-white ml-3 mt-12">
               Similares
             </h4>
             <SimilarMovies />
           </div>
-          <div className={`${name === 'InfoSeries' ? '' : 'hidden'} md:ml-12`}>
-            <h4 className="font-sans font-bold  text-xl text-white ml-3 mb-2 mt-12 ">
+          <div className={`${name === 'InfoSeries' ? '' : 'hidden'} m-10 h-[400px]`}>
+            <h4 className="font-sans font-bold text-xm text-white ml-3 mb-2 mt-12">
               Similares
             </h4>
             <SimilarSeries />
           </div>
         </div>
       </div>
-
       <div
         className={`${
           name === 'InfoSeries' || name === 'infoMovies' || name === 'Actors'

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Header from './Header';
 import Title from './UI/Title';
 import Description from './UI/Description';
@@ -8,11 +7,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import { useItem } from '../context/exportContext';
 
 const SectionFavorites = () => {
-  const [laterMovies, setlaterMovies] = useState([]);
-  const [laterSeries, setlaterSeries] = useState([]);
-
-  const { favoriteMovie } = useItem();
-  const { favoriteSerie } = useItem();
+  const { favoriteMovie, favoriteSerie } = useItem();
+  const { laterMovie, laterSerie } = useItem();
 
   const settings = {
     dots: true,
@@ -56,10 +52,10 @@ const SectionFavorites = () => {
           <p className="text-xm pl-2">Filmes favoritos</p>
           <Slider {...settings}>
             {favoriteMovie.length > 0 ? (
-              favoriteMovie.map((image, index) => (
+              favoriteMovie.filter((image) => image).map((image, index) => (
                 <div
                   key={index}
-                  className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]"
+                  className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px] cursor-pointer"
                   style={{ width: 240 }}
                 >
                   <img
@@ -85,7 +81,7 @@ const SectionFavorites = () => {
           <p className="text-xm pl-2">Séries favoritas</p>
           <Slider {...settings}>
             {favoriteSerie.length > 0 ? (
-              favoriteSerie.map((image, index) => (
+              favoriteSerie.filter((image) => image).map((image, index) => (
                 <div
                   key={index}
                   className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]"
@@ -113,8 +109,8 @@ const SectionFavorites = () => {
         <div className="mt-10 h-[400px]">
           <p className="text-xm pl-2">Filmes para ver mais tarde</p>
           <Slider {...settings}>
-            {laterMovies.length > 0 ? (
-              laterMovies.map((image, index) => (
+            {laterMovie.length > 0 ? (
+              laterMovie.filter((image) => image).map((image, index) => (
                 <div
                   key={index}
                   className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]"
@@ -142,8 +138,8 @@ const SectionFavorites = () => {
         <div className="mt-10 h-[400px]">
           <p className="text-xm pl-2">Séries para ver mais tarde</p>
           <Slider {...settings}>
-            {laterSeries.length > 0 ? (
-              laterSeries.map((image, index) => (
+            {laterSerie.length > 0 ? (
+              laterSerie.filter((image) => image).map((image, index) => (
                 <div
                   key={index}
                   className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]"
