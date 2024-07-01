@@ -376,14 +376,16 @@ const Section: React.FC<SectionProps> = ({ name }) => {
             </h4>
             <Slider {...settings} className="cursor-pointer">
               {cardTemporadaItems.length > 0 ? (
-                cardTemporadaItems.map((item) => (
-                  <div key={item.id} className=" rounded-[8px]  h-full  px-2">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                      className="h-full w-full object-cover rounded-[8px]"
-                    />
-                  </div>
-                ))
+                cardTemporadaItems
+                  .filter((item) => item.poster_path)
+                  .map((item) => (
+                    <div key={item.id} className=" rounded-[8px]  h-full  px-2">
+                      <img
+                        src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                        className="h-full w-full object-cover rounded-[8px]"
+                      />
+                    </div>
+                  ))
               ) : (
                 <p>Carregando...</p>
               )}
@@ -406,12 +408,14 @@ const Section: React.FC<SectionProps> = ({ name }) => {
 
       <div
         className={`${
-          name === 'InfoSeries' || name === 'infoMovies' || name === 'Actors' ? 'hidden' : ''
+          name === 'InfoSeries' || name === 'infoMovies' || name === 'Actors'
+            ? 'hidden'
+            : ''
         }`}
       >
         <SectionGrid />
       </div>
-      <div className={`${name === 'Actors' ? '': 'hidden'}`}>
+      <div className={`${name === 'Actors' ? '' : 'hidden'}`}>
         <Actors />
       </div>
       <Footer />

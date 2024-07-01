@@ -63,7 +63,7 @@ const Header = () => {
 
           <div className="order-2 lg:order-1">
             <nav className="lg:justify-center lg:items-center font-sans font-semibold ">
-              <ul className="flex space-x-4 w-80 justify-between lg:w-full text-white flex-wrap lg:flex-nowrap gap-6">
+              <ul className="flex space-x-4 w-80 justify-between lg:w-full text-white flex-wrap lg:flex-nowrap gap-6 lg:gap-0">
                 <li className="flex items-center ">
                   <NavLink
                     to="/home"
@@ -194,8 +194,6 @@ const Header = () => {
                           {watch.map((i) => (
                             <option value={i.rota}>{i.nome}</option>
                           ))}
-                          {/* <option value="series">Séries</option>
-                          <option value="celebridades">Celebridades</option> */}
                         </select>
                         <button className="ml-4" onClick={submitValueOptions}>
                           <img src={IconBusca} />

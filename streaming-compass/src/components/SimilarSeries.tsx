@@ -72,9 +72,13 @@ const SimilarSeries = () => {
     ],
   };
   const { setSelectedItem } = useItem();
+  const { setIdSeries } = useItem();
   const navigate = useNavigate();
+
   const onClickSeries = (item: SimilarSeries) => {
     setSelectedItem(item);
+    setIdSeries(item.id);
+
     navigate('/InfoSeries');
     window.scrollTo(0, 0);
   };
@@ -85,18 +89,20 @@ const SimilarSeries = () => {
         className=" bg-gradient-to-tr from-gray-900 cursor-pointer "
       >
         {cardSeriesItem.length > 0 ? (
-          cardSeriesItem.map((item) => (
-            <div
-              key={item.id}
-              className=" rounded-[8px]  h-full  px-2"
-              onClick={() => onClickSeries(item)}
-            >
-              <img
-                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                className="h-full w-full object-cover rounded-[8px]"
-              />
-            </div>
-          ))
+          cardSeriesItem
+            .filter((item) => item.poster_path)
+            .map((item) => (
+              <div
+                key={item.id}
+                className=" rounded-[8px]  h-full  px-2"
+                onClick={() => onClickSeries(item)}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                  className="h-full w-full object-cover rounded-[8px]"
+                />
+              </div>
+            ))
         ) : (
           <p>Carregando...</p>
         )}

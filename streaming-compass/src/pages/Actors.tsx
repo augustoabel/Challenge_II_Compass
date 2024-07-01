@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import axios from 'axios';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 
 const SectionGrid = () => {
   const [actor1Movies, setActor1Movies] = useState([]);
@@ -27,7 +25,6 @@ const SectionGrid = () => {
         const fetchedActors = response.data.results.slice(0, 3);
         setActors(fetchedActors);
 
-        
         if (fetchedActors.length > 0) {
           fetchMoviesForActor(fetchedActors[0].id, setActor1Movies);
           fetchMoviesForActor(fetchedActors[1].id, setActor2Movies);

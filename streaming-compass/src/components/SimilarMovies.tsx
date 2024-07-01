@@ -95,18 +95,20 @@ const SimilarMovies = () => {
         className=" bg-gradient-to-tr from-gray-900 cursor-pointer"
       >
         {cardMoviesItem.length > 0 ? (
-          cardMoviesItem.map((item) => (
-            <div
-              key={item.id}
-              className=" rounded-[8px]  h-full  px-2 "
-              onClick={() => onClickMovies(item)}
-            >
-              <img
-                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                className="h-full w-full object-cover rounded-[8px]"
-              />
-            </div>
-          ))
+          cardMoviesItem
+            .filter((item) => item.poster_path)
+            .map((item) => (
+              <div
+                key={item.id}
+                className=" rounded-[8px]  h-full  px-2 "
+                onClick={() => onClickMovies(item)}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                  className="h-full w-full object-cover rounded-[8px]"
+                />
+              </div>
+            ))
         ) : (
           <p>Carregando...</p>
         )}
