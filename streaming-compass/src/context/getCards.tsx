@@ -19,8 +19,10 @@ interface ItemContextType {
   setSelectedItem: (item: Item) => void;
   idSeries: Item | null;
   setIdSeries: (item: Item) => void;
-  selectedFavorite: string[];
-  setSelectedFavorite: (items: string[]) => void;
+  favoriteMovie: string[];
+  setFavoriteMovie: (items: string[]) => void;
+  favoriteSerie: string[];
+  setFavoriteSerie: (items: string[]) => void;
 }
 
 interface ItemProviderProps {
@@ -31,11 +33,12 @@ const ItemContext = createContext<ItemContextType | undefined>(undefined);
 export const ItemProvider: React.FC<ItemProviderProps> = ({ children }) => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [idSeries, setIdSeries] = useState<Item | null>(null);
-  const [selectedFavorite, setSelectedFavorite] = useState<string[]>([]);
+  const [favoriteMovie, setFavoriteMovie] = useState<string[]>([]);
+  const [favoriteSerie, setFavoriteSerie] = useState<string[]>([]);
 
   return (
     <ItemContext.Provider
-      value={{ selectedItem, setSelectedItem, idSeries, setIdSeries, selectedFavorite, setSelectedFavorite }}
+      value={{ selectedItem, setSelectedItem, idSeries, setIdSeries, favoriteMovie, setFavoriteMovie, favoriteSerie, setFavoriteSerie }}
     >
       {children}
     </ItemContext.Provider>

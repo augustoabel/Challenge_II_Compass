@@ -327,7 +327,25 @@ const Section: React.FC<SectionProps> = ({ name }) => {
 
               <div className="flex gap-6">
                 <ListButton />
-                <FavoriteButton selected={backImage} />
+                <div className={`${name === 'Home' ? '' : 'hidden'}`}>
+                  <FavoriteButton selectedMovie={backImage} />
+                </div>
+                <div className={`${name === 'Séries' ? '' : 'hidden'}`}>
+                  <FavoriteButton selectedSerie={backImage} />
+                </div>
+                <div className={`${name === 'Filmes' ? '' : 'hidden'}`}>
+                  <FavoriteButton selectedMovie={backImage} />
+                </div>
+                <div className={`${name === 'Actors' ? '' : 'hidden'}`}>
+                  <FavoriteButton selectedMovie={backImage} />
+                </div>
+                <div className={`${name === 'InfoSeries' ? '' : 'hidden'}`}>
+                  <FavoriteButton selectedSerie={backImage} />
+                </div>
+                <div className={`${name === 'infoMovies' ? '' : 'hidden'}`}>
+                  <FavoriteButton selectedMovie={backImage} />
+                </div>
+
               </div>
             </div>
           </div>
