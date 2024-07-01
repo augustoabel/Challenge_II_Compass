@@ -1,24 +1,57 @@
 import { Tooltip } from 'react-tooltip';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useItem } from '../../context/exportContext';
 import DoneIcon from '../../images/icons/done_black.png'
 
-const ListButton = () => {
+interface SelectedListProp {
+  selectedMovie: string;
+  selectedSerie: string;
+}
+
+const ListButton: React.FC<SelectedListProp> = ({
+  selectedMovie,
+  selectedSerie,
+}) => {
   const [tooltipContent, setTooltipContent] = useState('Adicionar à "assistir mais tarde"');
   const [checked, setChecked] = useState(false);
   const [add, setAdd] = useState("block");
   const [done, setDone] = useState("hidden");
 
-  const handleOnClickList = () => {
-    if(!checked){
+  const { laterMovie, setLaterMovie } = useItem();
+  const { laterSerie, setLaterSerie } = useItem();
+
+  useEffect(() => {
+    if(
+      laterMovie.includes(selectedMovie) &&
+      laterSerie.includes(selectedSerie)
+    ) {
       setTooltipContent('à "assistir mais tarde"');
-      setAdd("hidden")
-      setDone("block")
-      setChecked(true)
+      setAdd('hidden');
+      setDone('block');
+      setChecked(true);
     } else {
       setTooltipContent('Adicionar à "assistir mais tarde"');
-      setAdd("block")
-      setDone("hidden")
-      setChecked(false)
+      setAdd('block');
+      setDone('hidden');
+      setChecked(false);
+    }
+
+  }, [selectedMovie, laterMovie, selectedSerie, laterSerie])
+
+  const handleOnClickList = (movie: string, serie: string) => {
+    let newLaterMovies;
+    let newLaterSeries;
+
+    if(!checked){
+      newLaterMovies = [...laterMovie, movie]
+      setLaterMovie(newLaterMovies);
+      newLaterSeries = [...laterSerie, serie];
+      setLaterSerie(newLaterSeries);
+    } else {
+      newLaterMovies = laterMovie.filter((item) => item !== movie);
+      setLaterMovie(newLaterMovies);
+      newLaterSeries = laterSerie.filter((item) => item !== serie);
+      setLaterSerie(newLaterSeries);
     }
   }
 
@@ -28,8 +61,7 @@ const ListButton = () => {
         data-tooltip-id="list-button"
         data-tooltip-content={tooltipContent}
         data-tooltip-place="top"
-        data-tooltip-style="light"
-        onClick={handleOnClickList}
+        onClick={() => handleOnClickList(selectedMovie, selectedSerie)}
         className="w-12 h-12 flex justify-center items-center text-white border-white/90 border border-solid rounded-full p-2 hover:bg-white hover:text-black hover:transition-opacity hover:delay-700"
       >
         <svg

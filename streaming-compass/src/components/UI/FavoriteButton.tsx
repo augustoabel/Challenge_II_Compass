@@ -12,9 +12,7 @@ const FavoriteButton: React.FC<SelectedFavoriteProp> = ({
   selectedMovie,
   selectedSerie,
 }) => {
-  const [tooltipContent, setTooltipContent] = useState(
-    'Adicionar aos favoritos'
-  );
+  const [tooltipContent, setTooltipContent] = useState('Adicionar aos favoritos');
   const [checked, setChecked] = useState(false);
   const [add, setAdd] = useState('block');
   const [done, setDone] = useState('hidden');
@@ -24,7 +22,7 @@ const FavoriteButton: React.FC<SelectedFavoriteProp> = ({
 
   useEffect(() => {
     if (
-      favoriteMovie.includes(selectedMovie) ||
+      favoriteMovie.includes(selectedMovie) &&
       favoriteSerie.includes(selectedSerie)
     ) {
       setTooltipContent('aos favoritos');
