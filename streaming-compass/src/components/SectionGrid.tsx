@@ -1,11 +1,24 @@
-import React, { useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import axios from 'axios';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useItem } from '../context/exportContext';
 
-const SectionGrid = () => {
+interface Item {
+  id: number;
+  title: string;
+  poster_path: string;
+  name: string;
+  release_date: string;
+  first_air_date: string;
+  overview: string;
+  backdrop_path: string;
+  genre_ids: [];
+}
+
+const SectionGrid: React.FC = () => {
   const [movies, setMovies] = useState([]);
   const [halloweenCollections, setHalloweenCollections] = useState([]);
   const [popularSeries, setPopularSeries] = useState([]);
@@ -96,16 +109,39 @@ const SectionGrid = () => {
     ],
   };
 
+  const navigate = useNavigate();
+  const { setSelectedItem } = useItem();
+  const { setIdSeries } = useItem();
+  const { setIdMovies } = useItem();
+
+  const onClickCard = (item: Item) => {
+    setSelectedItem(item);
+    setIdSeries(item.id);
+    navigate('/InfoSeries');
+    window.scrollTo(0, 0);
+  };
+  const onClickMovies = (item: Item) => {
+    setSelectedItem(item);
+    setIdSeries(item.id);
+    setIdMovies(item.id);
+    navigate('/infoMovies');
+    window.scrollTo(0, 0);
+  };
   return (
     <div className="bg-gray-900 p-20 text-white">
       <p className="text-xl">Coleções de Halloween</p>
 
-      <Slider {...settings} className="mt-10">
+      <Slider {...settings} className="mt-10 cursor-pointer">
         {halloweenCollections.length > 0 ? (
           halloweenCollections.map((item) => (
             <div
               key={item.id}
+<<<<<<< HEAD
               className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[390px]"
+=======
+              className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+              onClick={() => onClickMovies(item)}
+>>>>>>> 0acedf41d073c67df830a4e0bfd406e693bedb49
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
@@ -122,12 +158,17 @@ const SectionGrid = () => {
       <div className="mt-10">
         <p className="text-xl">Séries em Alta</p>
 
-        <Slider {...settings} className="mt-1">
+        <Slider {...settings} className="mt-1 cursor-pointer">
           {popularSeries.length > 0 ? (
             popularSeries.map((series) => (
               <div
                 key={series.id}
+<<<<<<< HEAD
                 className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[390px]"
+=======
+                className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+                onClick={() => onClickCard(series)}
+>>>>>>> 0acedf41d073c67df830a4e0bfd406e693bedb49
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${series.poster_path}`}
@@ -145,12 +186,17 @@ const SectionGrid = () => {
       <div className="mt-10">
         <p className="text-xl">Filmes em Alta</p>
 
-        <Slider {...settings} className="mt-2">
+        <Slider {...settings} className="mt-2 cursor-pointer">
           {movies.length > 0 ? (
             movies.map((movie) => (
               <div
                 key={movie.id}
+<<<<<<< HEAD
                 className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[390px]"
+=======
+                className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[380px]"
+                onClick={() => onClickMovies(movie)}
+>>>>>>> 0acedf41d073c67df830a4e0bfd406e693bedb49
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
