@@ -43,12 +43,14 @@ const SimilarSeries = () => {
         console.error(error);
       });
   }, [location, idSeries]);
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 1,
     slidesToScroll: 1,
+    variableWidth: true,
     swipeToSlide: true,
     arrows: true,
     responsive: [
@@ -71,6 +73,7 @@ const SimilarSeries = () => {
       },
     ],
   };
+
   const { setSelectedItem } = useItem();
   const navigate = useNavigate();
   const onClickSeries = (item: SimilarSeries) => {
@@ -78,17 +81,19 @@ const SimilarSeries = () => {
     navigate('/InfoSeries');
     window.scrollTo(0, 0);
   };
+
   return (
     <div>
       <Slider
         {...settings}
-        className=" bg-gradient-to-tr from-gray-900 cursor-pointer "
+        className="bg-gradient-to-tr from-gray-900 cursor-pointer"
       >
         {cardSeriesItem.length > 0 ? (
           cardSeriesItem.map((item) => (
             <div
               key={item.id}
-              className=" rounded-[8px]  h-full  px-2"
+              className="rounded-[8px] h-[361px] px-2"
+              style={{ width: 240 }}
               onClick={() => onClickSeries(item)}
             >
               <img

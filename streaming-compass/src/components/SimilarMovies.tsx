@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useItem } from '../context/exportContext';
+
 interface SimilarMovies {
   id: number;
   poster_path: string;
@@ -16,6 +17,7 @@ interface SimilarMovies {
   first_air_date: string;
   genre_ids: [];
 }
+
 interface Item {
   id: number;
   title: string;
@@ -53,12 +55,14 @@ const SimilarMovies = () => {
         console.error(error);
       });
   }, [location, idMovies]);
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
+    variableWidth: true,
     swipeToSlide: true,
     arrows: true,
     responsive: [
@@ -88,17 +92,19 @@ const SimilarMovies = () => {
     navigate('/infoMovies');
     window.scrollTo(0, 0);
   };
+  
   return (
     <div>
       <Slider
         {...settings}
-        className=" bg-gradient-to-tr from-gray-900 cursor-pointer"
+        className="bg-gradient-to-tr from-gray-900 cursor-pointer"
       >
         {cardMoviesItem.length > 0 ? (
           cardMoviesItem.map((item) => (
             <div
               key={item.id}
-              className=" rounded-[8px]  h-full  px-2 "
+              className="rounded-[8px] h-[361px] px-2"
+              style={{ width: 240 }}
               onClick={() => onClickMovies(item)}
             >
               <img

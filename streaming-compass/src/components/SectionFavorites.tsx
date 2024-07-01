@@ -55,7 +55,7 @@ const SectionFavorites = () => {
               favoriteMovie.filter((image) => image).map((image, index) => (
                 <div
                   key={index}
-                  className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]"
+                  className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px] cursor-pointer"
                   style={{ width: 240 }}
                 >
                   <img

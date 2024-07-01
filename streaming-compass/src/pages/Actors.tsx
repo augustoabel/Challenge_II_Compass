@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import axios from 'axios';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 
 const SectionGrid = () => {
   const [actor1Movies, setActor1Movies] = useState([]);
@@ -24,10 +22,10 @@ const SectionGrid = () => {
             },
           }
         );
+
         const fetchedActors = response.data.results.slice(0, 3);
         setActors(fetchedActors);
 
-        
         if (fetchedActors.length > 0) {
           fetchMoviesForActor(fetchedActors[0].id, setActor1Movies);
           fetchMoviesForActor(fetchedActors[1].id, setActor2Movies);
@@ -62,8 +60,9 @@ const SectionGrid = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 1,
     slidesToScroll: 1,
+    variableWidth: true,
     swipeToSlide: true,
     arrows: true,
     responsive: [
@@ -88,21 +87,22 @@ const SectionGrid = () => {
   };
 
   return (
-    <div className="bg-gray-900 p-20 text-white">
-      <div className="flex flex-wrap">
-        <div className="w-full md:w-1/4 pr-5">
-          <div className="mt-10">
+    <div className="bg-gray-900 p-20 text-white sm:p-4">
+      <div className="grid grid-flow-col auto-cols-max w-360 ">
+        <div className="sm:pl-2 md:pl-16 md:pr-2 lg:pr-5 lg:pl-20">
+          <div className="mt-10 h-[400px]">
             <div className="mt-2 flex flex-col gap-4">
               {actors.length > 0 ? (
                 actors.map((actor) => (
                   <div
                     key={actor.id}
-                    className="bg-gray-900 rounded-[8px] border-8 border-gray-900 md:w-2/3 h-[390px] relative top-0.5 mb-[74px]"
+                    className="bg-gray-900 rounded-[8px] border border-gray-900 md:w-2/3 h-[400px] relative top-0.5 mb-[25px]"
                   >
-                    <p className="text-xl mb-4">{actor.name}</p>
+                    <p className="text-xm pb-2">{actor.name}</p>
                     <img
                       src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
                       alt={actor.name}
+                      style = {{ width: 290, height: 350 }}
                       className="h-full w-full object-cover rounded-[8px]"
                     />
                   </div>
@@ -115,19 +115,20 @@ const SectionGrid = () => {
         </div>
 
         <div className="w-full md:w-3/4">
-          <div className="mt-10">
-            <p className="text-xl mb-4">Conhecido(a) por</p>
+          <div className="mt-10 h-[400px]">
+            <p className="text-xm pl-2">Conhecido(a) por</p>
             <Slider {...settings} className="mt-2">
               {actor1Movies.length > 0 ? (
                 actor1Movies.map((movie) =>
                   movie.poster_path ? (
                     <div
                       key={movie.id}
-                      className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[390px]"
+                      className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]"
                     >
                       <img
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={movie.title}
+                        style = {{ width: 240 }}
                         className="h-full w-full object-cover rounded-[8px]"
                       />
                     </div>
@@ -139,19 +140,20 @@ const SectionGrid = () => {
             </Slider>
           </div>
 
-          <div className="mt-10">
-            <p className="text-xl mb-4">Conhecido(a) por</p>
+          <div className="mt-10 h-[400px]">
+            <p className="text-xm pl-2">Conhecido(a) por</p>
             <Slider {...settings} className="mt-2">
               {actor2Movies.length > 0 ? (
                 actor2Movies.map((movie) =>
                   movie.poster_path ? (
                     <div
                       key={movie.id}
-                      className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[390px]"
+                      className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]"
                     >
                       <img
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={movie.title}
+                        style = {{ width: 240 }}
                         className="h-full w-full object-cover rounded-[8px]"
                       />
                     </div>
@@ -163,19 +165,20 @@ const SectionGrid = () => {
             </Slider>
           </div>
 
-          <div className="mt-10">
-            <p className="text-xl mb-4">Conhecido(a) por</p>
+          <div className="mt-10 h-[400px]">
+            <p className="text-xm pl-2">Conhecido(a) por</p>
             <Slider {...settings} className="mt-2">
               {actor3Movies.length > 0 ? (
                 actor3Movies.map((movie) =>
                   movie.poster_path ? (
                     <div
                       key={movie.id}
-                      className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[390px]"
+                      className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]"
                     >
                       <img
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={movie.title}
+                        style = {{ width: 240 }}
                         className="h-full w-full object-cover rounded-[8px]"
                       />
                     </div>

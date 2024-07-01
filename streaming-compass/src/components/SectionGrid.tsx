@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Slider from 'react-slick';
-import axios from 'axios';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { useItem } from '../context/exportContext';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
+import axios from "axios";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { useItem } from "../context/exportContext";
 
 interface Item {
   id: number;
@@ -27,51 +27,51 @@ const SectionGrid: React.FC = () => {
     const fetchMovies = async () => {
       try {
         const response = await axios.get(
-          'https://api.themoviedb.org/3/movie/popular',
+          "https://api.themoviedb.org/3/movie/popular",
           {
             params: {
-              api_key: '276c8dd1a63ee21cfe68c83fd88f5107',
-              language: 'pt-BR',
+              api_key: "276c8dd1a63ee21cfe68c83fd88f5107",
+              language: "pt-BR",
             },
           }
         );
         setMovies(response.data.results);
       } catch (error) {
-        console.error('Erro ao buscar os filmes:', error);
+        console.error("Erro ao buscar os filmes:", error);
       }
     };
 
     const fetchHalloweenCollections = async () => {
       try {
         const response = await axios.get(
-          'https://api.themoviedb.org/3/list/1',
+          "https://api.themoviedb.org/3/list/1",
           {
             params: {
-              api_key: '276c8dd1a63ee21cfe68c83fd88f5107',
-              language: 'pt-BR',
+              api_key: "276c8dd1a63ee21cfe68c83fd88f5107",
+              language: "pt-BR",
             },
           }
         );
         setHalloweenCollections(response.data.items);
       } catch (error) {
-        console.error('Erro ao buscar as coleções de Halloween:', error);
+        console.error("Erro ao buscar as coleções de Halloween:", error);
       }
     };
 
     const fetchPopularSeries = async () => {
       try {
         const response = await axios.get(
-          'https://api.themoviedb.org/3/tv/popular',
+          "https://api.themoviedb.org/3/tv/popular",
           {
             params: {
-              api_key: '276c8dd1a63ee21cfe68c83fd88f5107',
-              language: 'pt-BR',
+              api_key: "276c8dd1a63ee21cfe68c83fd88f5107",
+              language: "pt-BR",
             },
           }
         );
         setPopularSeries(response.data.results);
       } catch (error) {
-        console.error('Erro ao buscar as séries populares:', error);
+        console.error("Erro ao buscar as séries populares:", error);
       }
     };
 
@@ -84,8 +84,9 @@ const SectionGrid: React.FC = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 1,
     slidesToScroll: 1,
+    variableWidth: true,
     swipeToSlide: true,
     arrows: true,
     responsive: [
@@ -117,49 +118,50 @@ const SectionGrid: React.FC = () => {
   const onClickCard = (item: Item) => {
     setSelectedItem(item);
     setIdSeries(item.id);
-    navigate('/InfoSeries');
+    navigate("/InfoSeries");
     window.scrollTo(0, 0);
   };
   const onClickMovies = (item: Item) => {
     setSelectedItem(item);
     setIdSeries(item.id);
     setIdMovies(item.id);
-    navigate('/infoMovies');
+    navigate("/infoMovies");
     window.scrollTo(0, 0);
   };
   return (
-    <div className="bg-gray-900 p-20 text-white">
-      <p className="text-xl">Coleções de Halloween</p>
-
-      <Slider {...settings} className="mt-10 cursor-pointer">
-        {halloweenCollections.length > 0 ? (
-          halloweenCollections.map((item) => (
-            <div
-              key={item.id}
-              className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
-              onClick={() => onClickMovies(item)}
-            >
-              <img
-                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                alt={item.title}
-                className="h-full w-full object-cover rounded-[8px]"
-              />
-            </div>
-          ))
-        ) : (
-          <p>Carregando...</p>
-        )}
-      </Slider>
-
-      <div className="mt-10">
-        <p className="text-xl">Séries em Alta</p>
-
+    <div className="bg-gray-900 text-white">
+      <div className="mt-10 h-[400px]">
+        <p className="text-xm pl-2">Coleções de Halloween</p>
+        <Slider {...settings} className="mt-1 cursor-pointer">
+          {halloweenCollections.length > 0 ? (
+            halloweenCollections.map((item) => (
+              <div
+                key={item.id}
+                className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]"
+                style={{ width: 240 }}
+                onClick={() => onClickMovies(item)}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                  alt={item.title}
+                  className="h-full w-full object-cover rounded-[8px]"
+                />
+              </div>
+            ))
+          ) : (
+            <p>Carregando...</p>
+          )}
+        </Slider>
+      </div>
+      <div className="mt-10 h-[400px]">
+        <p className="text-xm pl-2">Séries em Alta</p>
         <Slider {...settings} className="mt-1 cursor-pointer">
           {popularSeries.length > 0 ? (
             popularSeries.map((series) => (
               <div
                 key={series.id}
-                className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+                className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[361px]"
+                style={{ width: 240 }}
                 onClick={() => onClickCard(series)}
               >
                 <img
@@ -174,16 +176,15 @@ const SectionGrid: React.FC = () => {
           )}
         </Slider>
       </div>
-
-      <div className="mt-10">
-        <p className="text-xl">Filmes em Alta</p>
-
+      <div className="mt-10 h-[400px]">
+        <p className="text-xm pl-2">Filmes em Alta</p>
         <Slider {...settings} className="mt-2 cursor-pointer">
           {movies.length > 0 ? (
             movies.map((movie) => (
               <div
                 key={movie.id}
-                className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[380px]"
+                className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[361px] cursor-pointer"
+                style={{ width: 240 }}
                 onClick={() => onClickMovies(movie)}
               >
                 <img
