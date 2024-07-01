@@ -6,6 +6,18 @@ import 'slick-carousel/slick/slick-theme.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+interface Actor{
+  id:number;
+  name: string;
+  profile_path: string;
+}
+
+interface Movie {
+  id: number;
+  title: string;
+  poster_path: string;
+}
+
 const SectionGrid = () => {
   const [actor1Movies, setActor1Movies] = useState([]);
   const [actor2Movies, setActor2Movies] = useState([]);
