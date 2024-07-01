@@ -5,23 +5,12 @@ import axios from 'axios';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useItem } from '../context/exportContext';
-
-interface Item {
-  id: number;
-  title: string;
-  poster_path: string;
-  name: string;
-  release_date: string;
-  first_air_date: string;
-  overview: string;
-  backdrop_path: string;
-  genre_ids: number[];
-}
+import { Item } from '../context/getCards';
 
 const SectionGrid: React.FC = () => {
-  const [movies, setMovies] = useState<Item[]>([]);  
-  const [halloweenCollections, setHalloweenCollections] = useState<Item[]>([]);  
-  const [popularSeries, setPopularSeries] = useState<Item[]>([]);  
+  const [movies, setMovies] = useState<Item[]>([]);
+  const [halloweenCollections, setHalloweenCollections] = useState<Item[]>([]);
+  const [popularSeries, setPopularSeries] = useState<Item[]>([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -44,15 +33,16 @@ const SectionGrid: React.FC = () => {
     const fetchHalloweenCollections = async () => {
       try {
         const response = await axios.get(
-          'https://api.themoviedb.org/3/list/1',
+          'https://api.themoviedb.org/3/discover/movie',
           {
             params: {
               api_key: '276c8dd1a63ee21cfe68c83fd88f5107',
               language: 'pt-BR',
+              with_genres: '27',
             },
           }
         );
-        setHalloweenCollections(response.data.items);
+        setHalloweenCollections(response.data.results);
       } catch (error) {
         console.error('Erro ao buscar as coleções de Halloween:', error);
       }
@@ -134,7 +124,7 @@ const SectionGrid: React.FC = () => {
 
       <Slider {...settings} className="mt-10 cursor-pointer">
         {halloweenCollections.length > 0 ? (
-          halloweenCollections.map((item: Item) => (  
+          halloweenCollections.map((item: Item) => (
             <div
               key={item.id}
               className="rounded-[8px]  h-full  px-2"
@@ -157,7 +147,7 @@ const SectionGrid: React.FC = () => {
 
         <Slider {...settings} className="mt-1 cursor-pointer">
           {popularSeries.length > 0 ? (
-            popularSeries.map((series: Item) => (  
+            popularSeries.map((series: Item) => (
               <div
                 key={series.id}
                 className="rounded-[8px]  h-full  px-2"
@@ -181,7 +171,7 @@ const SectionGrid: React.FC = () => {
 
         <Slider {...settings} className="mt-2 cursor-pointer">
           {movies.length > 0 ? (
-            movies.map((movie: Item) => ( 
+            movies.map((movie: Item) => (
               <div
                 key={movie.id}
                 className="rounded-[8px]  h-full  px-2"
