@@ -21,6 +21,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import SimilarMovies from '../components/SimilarMovies';
 import SimilarSeries from '../components/SimilarSeries';
+import Actors from './Actors';
 
 interface SectionProps {
   name: string;
@@ -405,12 +406,14 @@ const Section: React.FC<SectionProps> = ({ name }) => {
 
       <div
         className={`${
-          name === 'InfoSeries' || name === 'infoMovies' ? 'hidden' : ''
+          name === 'InfoSeries' || name === 'infoMovies' || name === 'Actors' ? 'hidden' : ''
         }`}
       >
         <SectionGrid />
       </div>
-
+      <div className={`${name === 'Actors' ? '': 'hidden'}`}>
+        <Actors />
+      </div>
       <Footer />
     </>
   );

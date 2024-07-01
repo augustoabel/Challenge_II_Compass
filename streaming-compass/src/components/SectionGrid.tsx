@@ -136,12 +136,8 @@ const SectionGrid: React.FC = () => {
           halloweenCollections.map((item) => (
             <div
               key={item.id}
-<<<<<<< HEAD
-              className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[390px]"
-=======
               className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
               onClick={() => onClickMovies(item)}
->>>>>>> 0acedf41d073c67df830a4e0bfd406e693bedb49
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
@@ -163,12 +159,8 @@ const SectionGrid: React.FC = () => {
             popularSeries.map((series) => (
               <div
                 key={series.id}
-<<<<<<< HEAD
-                className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[390px]"
-=======
                 className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
                 onClick={() => onClickCard(series)}
->>>>>>> 0acedf41d073c67df830a4e0bfd406e693bedb49
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${series.poster_path}`}
@@ -191,12 +183,8 @@ const SectionGrid: React.FC = () => {
             movies.map((movie) => (
               <div
                 key={movie.id}
-<<<<<<< HEAD
-                className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[390px]"
-=======
                 className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[380px]"
                 onClick={() => onClickMovies(movie)}
->>>>>>> 0acedf41d073c67df830a4e0bfd406e693bedb49
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

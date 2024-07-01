@@ -195,9 +195,7 @@ const SectionGrid = () => {
 const Actors = () => {
   return (
     <>
-      <Header />
       <SectionGrid />
-      <Footer />
     </>
   );
 };
