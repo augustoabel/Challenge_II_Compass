@@ -1,6 +1,6 @@
 # Compass Video
 
-<img width="70px" src="./src/images/icons/blue-play.png"><br>
+<img width="70px" src="./streaming-compass/src/images/icons/blue-play.png"><br>
 Compass UOL - FrontEnd Challenge: Compass Video<br>
 
 
@@ -42,7 +42,7 @@ The challenge was based accordingly to the design and user interface in 🔗[Fig
 ## Screenshots
 
 ### Desktop Screen
-<img src="./src/images/desktopScreen.gif" alt="desktop screen">
+<img src="./streaming-compass/src/images/desktopScreen.gif" alt="desktop screen">
 
 ### Mobile Screen
 <img width="290px" src="./src/images/mobileScreen.gif" alt="donation modal screen">
@@ -58,7 +58,7 @@ While developing this application, we faced some challenges that helped to learn
 
 ## Authors
 
-<img width="100px" src="./src/images/icons/people-icon.png">
+<img width="100px" src="./streaming-compass/src/images/icons/people-icon.png">
 
 - Augusto Abel - [GitHub](https://github.com/augustoabel)
 - Camila Katayama - [GitHub](https://github.com/camilakataa)
