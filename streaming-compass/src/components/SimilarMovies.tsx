@@ -92,7 +92,7 @@ const SimilarMovies = () => {
     navigate('/infoMovies');
     window.scrollTo(0, 0);
   };
-  
+
   return (
     <div>
       <Slider
@@ -106,7 +106,7 @@ const SimilarMovies = () => {
               <div
                 key={item.id}
                 className="rounded-[8px] h-[361px] px-2"
-              style={{ width: 240 }}
+                style={{ width: 240 }}
                 onClick={() => onClickMovies(item)}
               >
                 <img
@@ -116,7 +116,7 @@ const SimilarMovies = () => {
               </div>
             ))
         ) : (
-          <p>Carregando...</p>
+          <p className="py-6 text-white text-lg">Carregando...</p>
         )}
       </Slider>
     </div>

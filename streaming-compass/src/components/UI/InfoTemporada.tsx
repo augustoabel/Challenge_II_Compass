@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Header from "../Header";
-import Footer from "../Footer";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import TitleSection from "./TitleSection";
-import Info from "./Info";
-import WatchButton from "./WatchButton";
-import TrailerButton from "./TrailerButton";
-import Description from "./Description";
-import ReactPlayer from "react-player";
+import React, { useState, useEffect } from 'react';
+import Header from '../Header';
+import Footer from '../Footer';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import TitleSection from './TitleSection';
+import Info from './Info';
+import WatchButton from './WatchButton';
+import TrailerButton from './TrailerButton';
+import Description from './Description';
+import ReactPlayer from 'react-player';
 
 interface Episodes {
   still_path: string;
@@ -24,23 +24,23 @@ interface InfoTempProps {
 const InfoTemporada: React.FC<InfoTempProps> = () => {
   const { id } = useParams<{ id: string }>();
   const [backdropPath, setBackdropPath] = useState();
-  const [season, setSeason] = useState("1");
+  const [season, setSeason] = useState('1');
   const [assessment, setAssessment] = useState(1);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
   const [load, setLoad] = useState(false);
   const [episodes, setEpisodes] = useState<Episodes[]>([]);
   const [showPlayer, setShowPlayer] = useState(false);
-  const videoUrl = "https://www.youtube.com/watch?v=dEbe0rS4Z2A";
+  const videoUrl = 'https://www.youtube.com/watch?v=dEbe0rS4Z2A';
 
   useEffect(() => {
     const options = {
-      method: "GET",
+      method: 'GET',
       url: `https://api.themoviedb.org/3/tv/${id}`,
-      params: { language: "en-US" },
+      params: { language: 'en-US' },
       headers: {
-        accept: "application/json",
+        accept: 'application/json',
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTg0MjAzMy4wNzAwMDksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.deJUW--bPu3C50WpmI04qiPKDfmNmXyQxK942JzGlgI",
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTg0MjAzMy4wNzAwMDksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.deJUW--bPu3C50WpmI04qiPKDfmNmXyQxK942JzGlgI',
       },
     };
 
@@ -57,13 +57,13 @@ const InfoTemporada: React.FC<InfoTempProps> = () => {
       });
 
     const options2 = {
-      method: "GET",
+      method: 'GET',
       url: `https://api.themoviedb.org/3/tv/${id}/season/1`,
-      params: { language: "en-US" },
+      params: { language: 'en-US' },
       headers: {
-        accept: "application/json",
+        accept: 'application/json',
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTg0MjAzMy4wNzAwMDksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.deJUW--bPu3C50WpmI04qiPKDfmNmXyQxK942JzGlgI",
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYTkzZGE3MWVhYjc2NDZjNjQxNzRhNWEyMmM2NDc4NCIsIm5iZiI6MTcxOTg0MjAzMy4wNzAwMDksInN1YiI6IjY2N2IwYjdhZjMzNThhNDc0MWQ5YzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.deJUW--bPu3C50WpmI04qiPKDfmNmXyQxK942JzGlgI',
       },
     };
 
@@ -76,7 +76,7 @@ const InfoTemporada: React.FC<InfoTempProps> = () => {
       .catch(function (error) {
         console.error(error);
       });
-  }, [load]);
+  }, [id]);
 
   const playVideo = () => {
     setShowPlayer(true);
@@ -92,8 +92,8 @@ const InfoTemporada: React.FC<InfoTempProps> = () => {
         className="bg-no-repeat"
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdropPath})`,
-          backgroundPosition: "top ",
-          backgroundSize: "cover",
+          backgroundPosition: 'top ',
+          backgroundSize: 'cover',
         }}
       >
         <div className="bg-gradient-to-tr from-gray-900">
@@ -133,14 +133,14 @@ const InfoTemporada: React.FC<InfoTempProps> = () => {
                     className=" w-full rounded-tl-xl rounded-bl-xl h-full  col-span-7  "
                     style={{
                       backgroundImage: `url(https://image.tmdb.org/t/p/original/${e.still_path})`,
-                      backgroundPosition: "top ",
-                      backgroundSize: "cover",
+                      backgroundPosition: 'top ',
+                      backgroundSize: 'cover',
                     }}
                   />
                   <div className="p-4 flex flex-col justify-between col-span-5">
                     <div>
                       <h3 className="text-lg font-semibold text-white">
-                        {`${index + 1}. ${e.name}`}{" "}
+                        {`${index + 1}. ${e.name}`}{' '}
                         <span className="mt-4 text-sm text-gray-500">
                           {e.runtime} min
                         </span>
