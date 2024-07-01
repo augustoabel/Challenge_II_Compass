@@ -51,7 +51,7 @@ const SectionGrid = () => {
         );
         setMovies(response.data.cast);
       } catch (error) {
-        console.error(`Erro ao buscar filmes para o ator ${actorId}:`, error);
+        console.error(`Erro ao buscar filmes para o ator. ${actorId}:`, error);
       }
     };
 
