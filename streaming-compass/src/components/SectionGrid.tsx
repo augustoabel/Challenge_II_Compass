@@ -136,7 +136,7 @@ const SectionGrid: React.FC = () => {
           halloweenCollections.map((item) => (
             <div
               key={item.id}
-              className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+              className="rounded-[8px]  h-full  px-2"
               onClick={() => onClickMovies(item)}
             >
               <img
@@ -159,7 +159,7 @@ const SectionGrid: React.FC = () => {
             popularSeries.map((series) => (
               <div
                 key={series.id}
-                className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+                className="rounded-[8px]  h-full  px-2"
                 onClick={() => onClickCard(series)}
               >
                 <img
@@ -183,7 +183,7 @@ const SectionGrid: React.FC = () => {
             movies.map((movie) => (
               <div
                 key={movie.id}
-                className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[380px]"
+                className="rounded-[8px]  h-full  px-2"
                 onClick={() => onClickMovies(movie)}
               >
                 <img
