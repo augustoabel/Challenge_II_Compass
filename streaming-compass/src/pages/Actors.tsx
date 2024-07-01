@@ -4,6 +4,18 @@ import axios from 'axios';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+interface Actor{
+  id:number;
+  name: string;
+  profile_path: string;
+}
+
+interface Movie {
+  id: number;
+  title: string;
+  poster_path: string;
+}
+
 const SectionGrid = () => {
   const [actor1Movies, setActor1Movies] = useState([]);
   const [actor2Movies, setActor2Movies] = useState([]);

@@ -11,7 +11,7 @@ import TitleSection from '../components/UI/TitleSection';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import SectionGrid from '../components/SectionGrid';
 import { useItem } from '../context/exportContext';
@@ -22,6 +22,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import SimilarMovies from '../components/SimilarMovies';
 import SimilarSeries from '../components/SimilarSeries';
 import Actors from './Actors';
+import InfoTemporada from '../components/UI/InfoTemporada';
 
 interface SectionProps {
   name: string;
@@ -39,6 +40,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
   const { selectedItem } = useItem();
   const { idSeries } = useItem();
   const [cardTemporadaItems, setCardTemporadasItem] = useState<Seasons[]>([]);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   interface Seasons {
     id: number;

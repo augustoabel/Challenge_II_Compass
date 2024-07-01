@@ -15,13 +15,13 @@ interface Item {
   first_air_date: string;
   overview: string;
   backdrop_path: string;
-  genre_ids: [];
+  genre_ids: number[];
 }
 
 const SectionGrid: React.FC = () => {
-  const [movies, setMovies] = useState([]);
-  const [halloweenCollections, setHalloweenCollections] = useState([]);
-  const [popularSeries, setPopularSeries] = useState([]);
+  const [movies, setMovies] = useState<Item[]>([]);  
+  const [halloweenCollections, setHalloweenCollections] = useState<Item[]>([]);  
+  const [popularSeries, setPopularSeries] = useState<Item[]>([]);  
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -127,16 +127,17 @@ const SectionGrid: React.FC = () => {
     navigate('/infoMovies');
     window.scrollTo(0, 0);
   };
+
   return (
     <div className="bg-gray-900 p-20 text-white">
       <p className="text-xl">Coleções de Halloween</p>
 
       <Slider {...settings} className="mt-10 cursor-pointer">
         {halloweenCollections.length > 0 ? (
-          halloweenCollections.map((item) => (
+          halloweenCollections.map((item: Item) => (  
             <div
               key={item.id}
-              className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+              className="rounded-[8px]  h-full  px-2"
               onClick={() => onClickMovies(item)}
             >
               <img
@@ -156,10 +157,10 @@ const SectionGrid: React.FC = () => {
 
         <Slider {...settings} className="mt-1 cursor-pointer">
           {popularSeries.length > 0 ? (
-            popularSeries.map((series) => (
+            popularSeries.map((series: Item) => (  
               <div
                 key={series.id}
-                className="bg-gray-900 rounded-[8px] border-8 border-gray-900 h-[380px]"
+                className="rounded-[8px]  h-full  px-2"
                 onClick={() => onClickCard(series)}
               >
                 <img
@@ -180,10 +181,10 @@ const SectionGrid: React.FC = () => {
 
         <Slider {...settings} className="mt-2 cursor-pointer">
           {movies.length > 0 ? (
-            movies.map((movie) => (
+            movies.map((movie: Item) => ( 
               <div
                 key={movie.id}
-                className="bg-gray-900 rounded-[15px] border-8 border-gray-900 h-[380px]"
+                className="rounded-[8px]  h-full  px-2"
                 onClick={() => onClickMovies(movie)}
               >
                 <img
