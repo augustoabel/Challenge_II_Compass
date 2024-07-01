@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useItem } from '../context/exportContext';
+import { useParams } from 'react-router-dom';
 
 interface SimilarSeries {
   id: number;
@@ -19,14 +20,16 @@ interface SimilarSeries {
 }
 
 const SimilarSeries = () => {
+  
   const location = useLocation();
   const [cardSeriesItem, setCardSeriesItem] = useState<SimilarSeries[]>([]);
   const { idSeries } = useItem();
+  const [id, setId] = useState(idSeries)
 
   useEffect(() => {
     const SimilarMovies = {
       method: 'GET',
-      url: `https://api.themoviedb.org/3/tv/${idSeries}/similar?language=en-US&page=1`,
+      url: `https://api.themoviedb.org/3/tv/${id}/similar?language=en-US&page=1`,
       headers: {
         accept: 'application/json',
         Authorization:
@@ -75,6 +78,7 @@ const SimilarSeries = () => {
   const navigate = useNavigate();
   const onClickSeries = (item: SimilarSeries) => {
     setSelectedItem(item);
+    setId(item.id);
     navigate('/InfoSeries');
     window.scrollTo(0, 0);
   };
