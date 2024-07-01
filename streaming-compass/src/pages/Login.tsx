@@ -11,7 +11,6 @@ const Login = () => {
     setIsLoading(true);
     try {
       const result = await getToken();
-      console.log(result);
     } catch (error) {
       console.error('Erro ao fazer login', error);
     }
