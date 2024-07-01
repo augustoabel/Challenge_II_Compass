@@ -4,7 +4,19 @@ import Slider from 'react-slick';
 import axios from 'axios';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useItem } from '../context/getCards';
+import { useItem } from '../context/exportContext';
+
+interface Item {
+  id: number;
+  title: string;
+  poster_path: string;
+  name: string;
+  release_date: string;
+  first_air_date: string;
+  overview: string;
+  backdrop_path: string;
+  genre_ids: [];
+}
 
 const SectionGrid: React.FC = () => {
   const [movies, setMovies] = useState([]);
@@ -100,6 +112,7 @@ const SectionGrid: React.FC = () => {
   const navigate = useNavigate();
   const { setSelectedItem } = useItem();
   const { setIdSeries } = useItem();
+  const { setIdMovies } = useItem();
 
   const onClickCard = (item: Item) => {
     setSelectedItem(item);
@@ -110,6 +123,7 @@ const SectionGrid: React.FC = () => {
   const onClickMovies = (item: Item) => {
     setSelectedItem(item);
     setIdSeries(item.id);
+    setIdMovies(item.id);
     navigate('/infoMovies');
     window.scrollTo(0, 0);
   };
@@ -117,7 +131,7 @@ const SectionGrid: React.FC = () => {
     <div className="bg-gray-900 p-20 text-white">
       <p className="text-xl">Coleções de Halloween</p>
 
-      <Slider {...settings} className="mt-10">
+      <Slider {...settings} className="mt-10 cursor-pointer">
         {halloweenCollections.length > 0 ? (
           halloweenCollections.map((item) => (
             <div
@@ -140,7 +154,7 @@ const SectionGrid: React.FC = () => {
       <div className="mt-10">
         <p className="text-xl">Séries em Alta</p>
 
-        <Slider {...settings} className="mt-1">
+        <Slider {...settings} className="mt-1 cursor-pointer">
           {popularSeries.length > 0 ? (
             popularSeries.map((series) => (
               <div
@@ -164,7 +178,7 @@ const SectionGrid: React.FC = () => {
       <div className="mt-10">
         <p className="text-xl">Filmes em Alta</p>
 
-        <Slider {...settings} className="mt-2">
+        <Slider {...settings} className="mt-2 cursor-pointer">
           {movies.length > 0 ? (
             movies.map((movie) => (
               <div

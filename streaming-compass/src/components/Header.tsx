@@ -11,13 +11,11 @@ import { NavLink, useLocation, Link } from 'react-router-dom';
 import { deleteToken } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 
-
 const Header = () => {
-
   const navigate = useNavigate();
   const handleClick = () => {
     navigate('/favorites');
-  }
+  };
 
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -101,9 +99,9 @@ const Header = () => {
                 </li>
                 <li className="flex items-center">
                   <NavLink
-                    to="/filmes"
+                    to="/Movies"
                     className={` flex items-center ${
-                      location.pathname === '/filmes' ? 'text-blue-500' : ''
+                      location.pathname === '/Movies' ? 'text-blue-500' : ''
                     }`}
                   >
                     <svg
@@ -113,7 +111,7 @@ const Header = () => {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                       className={`inline-block align-text-top mr-2 ${
-                        location.pathname === '/filmes'
+                        location.pathname === '/Movies'
                           ? 'text-blue-500'
                           : 'text-gray-300'
                       }`}
@@ -196,9 +194,9 @@ const Header = () => {
                       />
                       Buscar
                     </li>
-                    <li 
-                    className="flex items-center lg:w-32 whitespace-nowrap cursor-pointer"
-                    onClick={handleClick}
+                    <li
+                      className="flex items-center lg:w-32 whitespace-nowrap cursor-pointer"
+                      onClick={handleClick}
                     >
                       <img
                         src={IconAdd}
@@ -250,7 +248,9 @@ const Header = () => {
                         <li className="px-4 py-2">Minha conta</li>
                         <li className="px-4 py-2">Ajuda</li>
                         <li className="px-4 py-2">
-                          <Link to="/" onClick={deleteToken}>Sair</Link>
+                          <Link to="/" onClick={deleteToken}>
+                            Sair
+                          </Link>
                         </li>
                       </ul>
                     </div>

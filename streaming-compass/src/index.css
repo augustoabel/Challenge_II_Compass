@@ -3,43 +3,41 @@
 @tailwind utilities;
 
 body {
-    width: 100vw;
-    overflow-x: hidden;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 .login-bg {
-    background-image: './images/icons/login.png' repeat;
+  background-image: './images/icons/login.png' repeat;
 }
 
 #loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: black;
 }
 
 #loading-icon {
-    width: 40px; /* ajuste conforme necessário */
-    animation: rotate 500ms linear infinite;
+  width: 40px; /* ajuste conforme necessário */
+  animation: rotate 500ms linear infinite;
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }   
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-
-
 .blurLogin {
-    /* From https://css.glass */
-    background: rgba(39, 39, 39, 0.32);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(11.2px);
-    -webkit-backdrop-filter: blur(11.2px);
+  /* From https://css.glass */
+  background: rgba(39, 39, 39, 0.32);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.2px);
+  -webkit-backdrop-filter: blur(11.2px);
 }

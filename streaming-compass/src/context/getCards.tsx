@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+// ItemProvider.tsx
+import React, { createContext, useState, ReactNode } from 'react';
 
-interface Item {
+export interface Item {
   id: number;
   title: string;
   poster_path: string;
@@ -10,38 +11,42 @@ interface Item {
   overview: string;
   backdrop_path: string;
   genre_ids: [];
-  // Adicione outros campos necessários
 }
 
-interface ItemContextType {
+export interface ItemContextType {
   selectedItem: Item | null;
   setSelectedItem: (item: Item) => void;
-  idSeries: Item | null;
-  setIdSeries: (item: Item) => void;
+  idSeries: number | null;
+  setIdSeries: (item: number) => void;
+  idMovies: number | null;
+  setIdMovies: (item: number) => void;
 }
 
 interface ItemProviderProps {
   children: ReactNode;
 }
+
 const ItemContext = createContext<ItemContextType | undefined>(undefined);
 
 export const ItemProvider: React.FC<ItemProviderProps> = ({ children }) => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
-  const [idSeries, setIdSeries] = useState<Item | null>(null);
+  const [idSeries, setIdSeries] = useState<number | null>(null);
+  const [idMovies, setIdMovies] = useState<number | null>(null);
 
   return (
     <ItemContext.Provider
-      value={{ selectedItem, setSelectedItem, idSeries, setIdSeries }}
+      value={{
+        selectedItem,
+        setSelectedItem,
+        idSeries,
+        setIdSeries,
+        idMovies,
+        setIdMovies,
+      }}
     >
       {children}
     </ItemContext.Provider>
   );
 };
 
-export const useItem = (): ItemContextType => {
-  const context = useContext(ItemContext);
-  if (!context) {
-    throw new Error('useItem must be used within an ItemProvider');
-  }
-  return context;
-};
+export { ItemContext };

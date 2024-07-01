@@ -14,11 +14,13 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import SectionGrid from '../components/SectionGrid';
-import { useItem } from '../context/getCards';
+import { useItem } from '../context/exportContext';
 import TrailerButton from '../components/UI/TrailerButton';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import SimilarMovies from '../components/SimilarMovies';
+import SimilarSeries from '../components/SimilarSeries';
 
 interface SectionProps {
   name: string;
@@ -33,13 +35,16 @@ const Section: React.FC<SectionProps> = ({ name }) => {
   const [genreGlobal, setGenreGlobal] = useState({ genres: [] });
   const [globalIdGenre, setGlobalIdGenre] = useState<number[]>([]);
   const [backImage, setBackImage] = useState('');
-  //const [idSeries, setIdSeries] = useState<number>();
   const { selectedItem } = useItem();
   const { idSeries } = useItem();
-  const [teste, setTeste] = useState([]);
+  const [cardTemporadaItems, setCardTemporadasItem] = useState<Seasons[]>([]);
+
+  interface Seasons {
+    id: number;
+    poster_path: string;
+  }
 
   useEffect(() => {
-    console.log("NAME:", name)
     if (name === 'InfoSeries') {
       const Seasons = {
         method: 'GET',
@@ -54,8 +59,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
       axios
         .request(Seasons)
         .then(function (response) {
-          setTeste(response.data.seasons);
-          console.log(teste);
+          setCardTemporadasItem(response.data.seasons);
         })
         .catch(function (error) {
           console.error(error);
@@ -73,8 +77,23 @@ const Section: React.FC<SectionProps> = ({ name }) => {
         } else {
           setReleaseDate(selectedItem.first_air_date);
         }
-        //setIdSeries(selectedItem.id);
-        console.log(idSeries);
+        setDescription(selectedItem.overview);
+        setBackImage(selectedItem.backdrop_path);
+        setGlobalIdGenre(selectedItem.genre_ids);
+      }
+    } else if (name === 'infoMovies') {
+      if (selectedItem) {
+        if (selectedItem.title) {
+          setTitle(selectedItem.title);
+        } else {
+          setTitle(selectedItem.name);
+        }
+
+        if (selectedItem.release_date) {
+          setReleaseDate(selectedItem.release_date);
+        } else {
+          setReleaseDate(selectedItem.first_air_date);
+        }
         setDescription(selectedItem.overview);
         setBackImage(selectedItem.backdrop_path);
         setGlobalIdGenre(selectedItem.genre_ids);
@@ -225,7 +244,6 @@ const Section: React.FC<SectionProps> = ({ name }) => {
             setDescription(response.data.results[0].known_for[0].overview);
             setBackImage(response.data.results[0].known_for[0].backdrop_path);
             setGlobalIdGenre(response.data.results[0].known_for[0].genre_ids);
-            console.log(globalIdGenre);
           })
           .catch(function (error) {
             console.error(error);
@@ -251,7 +269,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           });
       }
     }
-  }, [location, idSeries]);
+  }, [location, idSeries, globalIdGenre, name, selectedItem]);
   const settings = {
     dots: true,
     infinite: true,
@@ -284,7 +302,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
   return (
     <>
       <div
-        className="bg-no-repeat bg-cover "
+        className="bg-no-repeat bg-cover  bg-center min-h-screen"
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original/${backImage})`,
           backgroundPosition: 'center ',
@@ -292,7 +310,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
       >
         <div className="flex flex-col justify-start font-sans bg-gradient-to-tr from-gray-900 md:justify-center ">
           <Header />
-          <div className=" md:h-screen py-40">
+          <div className=" md:h-screen py-40  ">
             <div
               className={`flex flex-row gap-2.5 mb-8 mx-4 md:mt-9  md:mx-20 ${
                 name === 'Home' ||
@@ -308,7 +326,7 @@ const Section: React.FC<SectionProps> = ({ name }) => {
               <FilterGenre genre={genre} />
             </div>
 
-            <div className="flex flex-col gap-2.5 mb-8 mx-4 md:mt-9 md:mx-20">
+            <div className="flex flex-col gap-2.5 mb-8 mx-4 md:mt-9 md:mx-20  ">
               <Title title={title} />
               <Info info={releaseDate} />
               <Genre genreGlobal={genreGlobal} globalIdGenre={globalIdGenre} />
@@ -330,10 +348,17 @@ const Section: React.FC<SectionProps> = ({ name }) => {
               </div>
             </div>
           </div>
-          <div className={`${name === 'InfoSeries' ? '' : 'hidden'} h-full `}>
-            <Slider {...settings} className="">
-              {teste.length > 0 ? (
-                teste.map((item) => (
+          <div
+            className={`${
+              name === 'InfoSeries' ? '' : 'hidden'
+            } h-full items-center ml-12`}
+          >
+            <h4 className="font-sans font-bold  text-xl text-white ml-3 mb-4 mt-12 ">
+              Temporadas
+            </h4>
+            <Slider {...settings} className="cursor-pointer">
+              {cardTemporadaItems.length > 0 ? (
+                cardTemporadaItems.map((item) => (
                   <div key={item.id} className=" rounded-[8px]  h-full  px-2">
                     <img
                       src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
@@ -345,6 +370,18 @@ const Section: React.FC<SectionProps> = ({ name }) => {
                 <p>Carregando...</p>
               )}
             </Slider>
+          </div>
+          <div className={`${name === 'infoMovies' ? '' : 'hidden'} md:ml-12`}>
+            <h4 className="font-sans font-bold  text-xl text-white ml-3 mb-2 mt-12 ">
+              Similares
+            </h4>
+            <SimilarMovies />
+          </div>
+          <div className={`${name === 'InfoSeries' ? '' : 'hidden'} md:ml-12`}>
+            <h4 className="font-sans font-bold  text-xl text-white ml-3 mb-2 mt-12 ">
+              Similares
+            </h4>
+            <SimilarSeries />
           </div>
         </div>
       </div>
